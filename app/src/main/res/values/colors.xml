@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="calculator_button_background">#efefef</color>
+    <color name="calculator_background">#E25041</color>
+
+</resources>

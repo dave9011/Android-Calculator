@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.GridLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@color/calculator_background"
+    app:columnCount="4"
+    app:layout_gravity="center"
+    app:orientation="horizontal">
+
+    <Button
+        android:id="@+id/divide_button"
+        style="@style/calculator_button"
+        android:clickable="true"
+        android:text="/"
+        app:layout_column="3"/>
+
+    <Button
+        android:id="@+id/one_button"
+        android:text="1" />
+
+    <Button
+        android:id="@+id/two_button"
+        style="@style/calculator_button"
+        android:text="2" />
+
+    <Button
+        android:id="@+id/three_button"
+        style="@style/calculator_button"
+        android:text="3" />
+
+    <Button
+        android:id="@+id/multiply_button"
+        style="@style/calculator_button"
+        android:clickable="false"
+        android:text="*"/>
+
+    <Button
+        android:id="@+id/four_button"
+        style="@style/calculator_button"
+        android:text="4" />
+
+    <Button
+        android:id="@+id/five_button"
+        style="@style/calculator_button"
+        android:text="5" />
+
+    <Button
+        android:id="@+id/six_button"
+        style="@style/calculator_button"
+        android:text="6" />
+
+    <Button
+        android:id="@+id/subtract_button"
+        style="@style/calculator_button"
+        android:text="-" />
+
+    <Button
+        android:id="@+id/seven_button"
+        style="@style/calculator_button"
+        android:text="7" />
+
+    <Button
+        android:id="@+id/eight_button"
+        style="@style/calculator_button"
+        android:text="8" />
+
+    <Button
+        android:id="@+id/nine_button"
+        style="@style/calculator_button"
+        android:text="9" />
+
+    <Button
+        android:id="@+id/add_button"
+        style="@style/calculator_button"
+        android:text="+"
+        app:layout_gravity="fill"
+        app:layout_rowSpan="3" />
+
+    <Button
+        android:id="@+id/zero_button6"
+        style="@style/calculator_button"
+        android:text="0"
+        app:layout_columnSpan="2"
+        app:layout_gravity="fill" />
+
+    <Button
+        android:id="@+id/zero_other_button"
+        style="@style/calculator_button"
+        android:text="00" />
+
+    <Button
+        android:id="@+id/equals_button"
+        style="@style/calculator_button"
+        android:text="="
+        app:layout_columnSpan="3"
+        app:layout_gravity="fill" />
+
+</android.support.v7.widget.GridLayout>
