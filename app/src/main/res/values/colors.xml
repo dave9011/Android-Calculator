@@ -2,6 +2,7 @@
 <resources>
 
     <color name="calculator_button_background">#efefef</color>
-    <color name="calculator_background">#E25041</color>
+    <color name="calculator_background">#efefef</color>
+    <color name="apptheme_color">#ff4444</color>
 
 </resources>
