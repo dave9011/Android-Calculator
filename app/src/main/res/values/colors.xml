@@ -4,5 +4,8 @@
     <color name="calculator_button_background">#efefef</color>
     <color name="calculator_background">#efefef</color>
     <color name="apptheme_color">#ff4444</color>
+    <color name="display_background">#D1D5D8</color>
+
+    <color name="action_bar_color">#403f43</color>
 
 </resources>

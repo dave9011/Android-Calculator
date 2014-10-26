@@ -46,6 +46,10 @@ public class Calculator extends ActionBarActivity implements View.OnClickListene
     protected Button b_right_parenthesis;
     protected Button b_equals;
 
+    // TODO: add all unadded buttons (leftmost column and backspace button) and their functionality
+
+    protected Button b_backspace;
+
     protected Editable displayText;
 
     @Override
@@ -83,6 +87,8 @@ public class Calculator extends ActionBarActivity implements View.OnClickListene
         displayText = displayView.getText();
         displayText.setFilters( new InputFilter[]{ new InputFilter.LengthFilter(DISPLAY_MAX_LENGTH)} );
 
+        b_backspace = (Button)findViewById(R.id.backspace_button);
+
         b_clear = (Button)findViewById(R.id.clear_button);
 
         b_0 = (Button)findViewById(R.id.zero_button);
@@ -105,6 +111,7 @@ public class Calculator extends ActionBarActivity implements View.OnClickListene
         b_right_parenthesis = (Button)findViewById(R.id.right_parenthesis_button);
 
         b_clear.setOnClickListener(this);
+        b_backspace.setOnClickListener(this);
         b_0.setOnClickListener(this);
         b_1.setOnClickListener(this);
         b_2.setOnClickListener(this);
@@ -155,6 +162,13 @@ public class Calculator extends ActionBarActivity implements View.OnClickListene
 
             case R.id.clear_button:
                 displayText.clear();
+                break;
+
+            case R.id.backspace_button :
+                int text_length = displayText.length();
+                if (text_length > 0){
+                    displayText.delete(text_length-1, text_length);
+                }
                 break;
 
             case R.id.zero_button :
