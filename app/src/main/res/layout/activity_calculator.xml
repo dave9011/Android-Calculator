@@ -5,9 +5,9 @@
               android:layout_height="match_parent"
               android:background="#ff343336"
               android:orientation="vertical"
-              android:paddingLeft="5dp"
-              android:paddingRight="5dp"
-    >
+              android:paddingLeft="8dp"
+              android:paddingRight="8dp"
+              android:paddingTop="25dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -22,25 +22,26 @@
             android:layout_width="0dp"
             android:layout_height="fill_parent"
             android:layout_marginLeft="2dp"
+            android:layout_marginRight="10dp"
             android:layout_weight="1"
             android:background="@color/display_background"
             android:ellipsize="start"
             android:enabled="true"
-            android:gravity="end"
-            android:hint="@string/display_hint"
-            android:paddingBottom="10dp"
-            android:paddingEnd="10dp"
-            android:paddingRight="10dp"
-            android:paddingTop="10dp"
+            android:focusable="false"
+            android:gravity="end|center_vertical"
+            android:paddingEnd="5dp"
+            android:paddingRight="5dp"
+            android:scrollHorizontally="true"
             android:singleLine="true"
-            android:textSize="20sp"/>
+            android:textColor="@android:color/black"
+            android:textSize="23sp"/>
 
         <Button
             android:id="@+id/backspace_button"
+            style="@style/OperatorButton"
             android:layout_width="wrap_content"
             android:layout_height="fill_parent"
             android:layout_marginRight="2dp"
-            android:background="#ff757373"
             android:text="\u003c="/>
 
 
@@ -53,55 +54,50 @@
 
         <Button
             android:id="@+id/sin_button"
+            style="@style/OperatorButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="2dp"
             android:layout_weight="1"
-            android:background="#ff34c089"
             android:clickable="true"
             android:text="sin"
             />
 
         <Button
             android:id="@+id/clear_button"
+            style="@style/OperatorButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="2dp"
             android:layout_weight="1"
-            android:background="#ff5279b3"
             android:clickable="true"
             android:text="C"
             android:textStyle="bold"/>
 
         <Button
             android:id="@+id/left_parenthesis_button"
+            style="@style/ButtonAltColor1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="2dp"
             android:layout_weight="1"
-            android:background="#ff9f71c0"
             android:clickable="true"
             android:text="("
             android:textStyle="bold"/>
 
         <Button
             android:id="@+id/right_parenthesis_button"
+            style="@style/ButtonAltColor1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="2dp"
             android:layout_weight="1"
-            android:background="#ff9f71c0"
             android:clickable="true"
             android:text=")"
             android:textStyle="bold"/>
 
         <Button
             android:id="@+id/divide_button"
+            style="@style/OperatorButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="2dp"
             android:layout_weight="1"
-            android:background="#ff34c089"
             android:clickable="true"
             android:text="/"
             android:textStyle="bold"
@@ -116,49 +112,44 @@
 
         <Button
             android:id="@+id/cos_button"
+            style="@style/OperatorButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="2dp"
             android:layout_weight="1"
-            android:background="#ff34c089"
             android:clickable="true"
             android:text="cos"
             />
 
         <Button
             android:id="@+id/one_button"
+            style="@style/NumberButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="2dp"
             android:layout_weight="1"
-            android:background="#ff4444"
             android:text="1"/>
 
         <Button
             android:id="@+id/two_button"
+            style="@style/NumberButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="2dp"
             android:layout_weight="1"
-            android:background="#ff4444"
             android:text="2"/>
 
         <Button
             android:id="@+id/three_button"
+            style="@style/NumberButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="2dp"
             android:layout_weight="1"
-            android:background="#ff4444"
             android:text="3"/>
 
         <Button
             android:id="@+id/multiply_button"
+            style="@style/OperatorButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="2dp"
             android:layout_weight="1"
-            android:background="#ff34c089"
             android:text="*"
             android:textStyle="bold"
             />
@@ -172,49 +163,44 @@
 
         <Button
             android:id="@+id/tan_button"
+            style="@style/OperatorButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="2dp"
             android:layout_weight="1"
-            android:background="#ff34c089"
             android:clickable="true"
             android:text="tan"
             />
 
         <Button
             android:id="@+id/four_button"
+            style="@style/NumberButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="2dp"
             android:layout_weight="1"
-            android:background="#ff4444"
             android:text="4"/>
 
         <Button
             android:id="@+id/five_button"
+            style="@style/NumberButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="2dp"
             android:layout_weight="1"
-            android:background="#ff4444"
             android:text="5"/>
 
         <Button
             android:id="@+id/six_button"
+            style="@style/NumberButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="2dp"
             android:layout_weight="1"
-            android:background="#ff4444"
             android:text="6"/>
 
         <Button
             android:id="@+id/subtract_button"
+            style="@style/OperatorButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="2dp"
             android:layout_weight="1"
-            android:background="#ff34c089"
             android:text="-"
             android:textStyle="bold"
             />
@@ -228,49 +214,44 @@
 
         <Button
             android:id="@+id/eulers_button"
+            style="@style/OperatorButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="2dp"
             android:layout_weight="1"
-            android:background="#ff34c089"
             android:clickable="true"
             android:text="e"
             />
 
         <Button
             android:id="@+id/seven_button"
+            style="@style/NumberButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="2dp"
             android:layout_weight="1"
-            android:background="#ff4444"
             android:text="7"/>
 
         <Button
             android:id="@+id/eight_button"
+            style="@style/NumberButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="2dp"
             android:layout_weight="1"
-            android:background="#ff4444"
             android:text="8"/>
 
         <Button
             android:id="@+id/nine_button"
+            style="@style/NumberButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="2dp"
             android:layout_weight="1"
-            android:background="#ff4444"
             android:text="9"/>
 
         <Button
             android:id="@+id/add_button"
+            style="@style/OperatorButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="2dp"
             android:layout_weight="1"
-            android:background="#ff34c089"
             android:text="+"
             android:textStyle="bold"
             />
@@ -284,57 +265,48 @@
 
         <Button
             android:id="@+id/pi_button"
+            style="@style/OperatorButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="2dp"
             android:layout_weight="1"
-            android:background="#ff34c089"
             android:clickable="true"
             android:text="\u03c0"
             />
 
         <Button
             android:id="@+id/period_button"
+            style="@style/ButtonAltColor1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="2dp"
             android:layout_weight="1"
-            android:background="#ff757373"
             android:text="."
             android:textStyle="bold"/>
 
         <Button
             android:id="@+id/zero_button"
+            style="@style/NumberButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="2dp"
             android:layout_weight="1"
-            android:background="#ff4444"
             android:text="0"/>
 
         <Button
             android:id="@+id/plusMinus_button"
+            style="@style/ButtonAltColor1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="2dp"
             android:layout_weight="1"
-            android:background="#ff757373"
             android:text="+/-"
             android:textStyle="bold"/>
 
-        <!-- TODO: add functionality for plus/minus button -->
-
-
         <Button
             android:id="@+id/equals_button"
+            style="@style/ButtonAltColor2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="2dp"
             android:layout_weight="1"
-            android:background="#ff5279b3"
             android:text="="
-            android:textStyle="bold"
-            />
+            android:textStyle="bold" />
 
     </LinearLayout>
 

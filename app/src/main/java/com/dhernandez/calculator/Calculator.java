@@ -1,12 +1,12 @@
 package com.dhernandez.calculator;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.text.Editable;
 import android.text.InputFilter;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -18,10 +18,13 @@ import com.dhernandez.calculator.utils.Parser;
 import com.dhernandez.calculator.utils.ParserException;
 import com.dhernandez.calculator.utils.SetVariable;
 
+import java.util.ArrayList;
+
 
 public class Calculator extends ActionBarActivity implements View.OnClickListener {
 
     public static final String TAG = Calculator.class.getSimpleName();
+    public static final int NUM_HISTORY_SAVED = 10;
 
     protected final int DISPLAY_MAX_LENGTH = 20;
 
@@ -44,13 +47,20 @@ public class Calculator extends ActionBarActivity implements View.OnClickListene
     protected Button b_period;
     protected Button b_left_parenthesis;
     protected Button b_right_parenthesis;
+    protected Button b_plusMinus;
     protected Button b_equals;
 
-    // TODO: add all unadded buttons (leftmost column and backspace button) and their functionality
+    protected Button b_sin;
+    protected Button b_cos;
+    protected Button b_tan;
+    protected Button b_eulers;
+    protected Button b_pi;
 
     protected Button b_backspace;
 
     protected Editable displayText;
+
+    protected ArrayList<String> mHistoryList = new ArrayList<String>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,31 +68,22 @@ public class Calculator extends ActionBarActivity implements View.OnClickListene
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calculator);
 
+        getSupportActionBar().hide();
+
         //Set activity background color
         getWindow().getDecorView().setBackgroundColor(getResources().getColor(R.color.calculator_background) );
 
         //Initialize the member view variables
         init();
 
-//        displayView = (EditText)findViewById(R.id.display);
-//        displayView.setOnFocusChangeListener( new View.OnFocusChangeListener() {
-//            @Override
-//            public void onFocusChange(View view, boolean hasFocus) {
-//
-//                Log.v(TAG, "focus changed -- display - " + hasFocus);
-//
-//                if( hasFocus == false && ((EditText)view).getText().toString().isEmpty() ){
-//                    displayView.setHint("");
-//                }
-//
-//            }
-//        });
-
     }
 
     private void init() {
 
         displayView = (EditText)findViewById(R.id.display);
+
+        displayView.setFocusable(false);
+        displayView.setClickable(true);
 
         displayText = displayView.getText();
         displayText.setFilters( new InputFilter[]{ new InputFilter.LengthFilter(DISPLAY_MAX_LENGTH)} );
@@ -91,6 +92,13 @@ public class Calculator extends ActionBarActivity implements View.OnClickListene
 
         b_clear = (Button)findViewById(R.id.clear_button);
 
+        b_sin = (Button)findViewById(R.id.sin_button);
+        b_cos = (Button)findViewById(R.id.cos_button);
+        b_tan = (Button)findViewById(R.id.tan_button);
+        b_eulers = (Button)findViewById(R.id.eulers_button);
+        b_pi = (Button)findViewById(R.id.pi_button);
+
+        b_plusMinus = (Button)findViewById(R.id.plusMinus_button);
         b_0 = (Button)findViewById(R.id.zero_button);
         b_1 = (Button)findViewById(R.id.one_button);
         b_2 = (Button)findViewById(R.id.two_button);
@@ -110,8 +118,13 @@ public class Calculator extends ActionBarActivity implements View.OnClickListene
         b_left_parenthesis = (Button)findViewById(R.id.left_parenthesis_button);
         b_right_parenthesis = (Button)findViewById(R.id.right_parenthesis_button);
 
+        displayView.setOnClickListener(this);
         b_clear.setOnClickListener(this);
         b_backspace.setOnClickListener(this);
+        b_sin.setOnClickListener(this);
+        b_cos.setOnClickListener(this);
+        b_tan.setOnClickListener(this);
+        b_plusMinus.setOnClickListener(this);
         b_0.setOnClickListener(this);
         b_1.setOnClickListener(this);
         b_2.setOnClickListener(this);
@@ -133,32 +146,20 @@ public class Calculator extends ActionBarActivity implements View.OnClickListene
 
     }
 
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.calculator, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-        if (id == R.id.action_settings || super.onOptionsItemSelected(item)) {
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
     @Override
     public void onClick(View view) {
 
         int button_id = view.getId();
 
         switch(button_id) {
+
+            case R.id.display:
+                if(mHistoryList != null && !mHistoryList.isEmpty() ){
+                    showHistoryDialog();
+                } else {
+                    Toast.makeText(this, "No history to show", Toast.LENGTH_SHORT).show();
+                }
+                break;
 
             case R.id.clear_button:
                 displayText.clear();
@@ -168,6 +169,29 @@ public class Calculator extends ActionBarActivity implements View.OnClickListene
                 int text_length = displayText.length();
                 if (text_length > 0){
                     displayText.delete(text_length-1, text_length);
+                }
+                break;
+
+            case R.id.eulers_button:
+                displayText.append(b_eulers.getText());
+                break;
+
+            case R.id.pi_button:
+                displayText.append(b_pi.getText());
+                break;
+
+            //TODO:finish this cdode for plus minus
+            //***ADD CHECK FOR ARRAYOUTOFBOUNDSEXCEPTION for insert method
+            case R.id.plusMinus_button:
+                if(displayText.length() == 0){
+                    displayText.append("-");
+                }
+                if(displayText.charAt(0) == '-'){
+                    Toast.makeText(this, "negative", Toast.LENGTH_SHORT);
+                } else if(displayText.charAt(0) == '+') {
+                    Toast.makeText(this, "positive", Toast.LENGTH_SHORT);
+                } else {
+
                 }
                 break;
 
@@ -239,12 +263,46 @@ public class Calculator extends ActionBarActivity implements View.OnClickListene
                 displayText.append(b_right_parenthesis.getText());
                 break;
 
+            case R.id.sin_button:
+                String sinText = displayText.toString();
+                if(sinText.isEmpty()){
+                    sinText = "sin(";
+                } else {
+                    sinText = "sin(" + sinText + ")";
+                }
+                displayText.clear();
+                displayText.append(sinText);
+                break;
+
+            case R.id.cos_button:
+                String cosText = displayText.toString();
+                if(cosText.isEmpty()){
+                    cosText = "cos(";
+                } else {
+                    cosText = "cos(" + cosText + ")";
+                }
+                displayText.clear();
+                displayText.append(cosText);
+                break;
+
+            case R.id.tan_button:
+                String tanText = displayText.toString();
+                if(tanText.isEmpty()){
+                    tanText = "cos(";
+                } else {
+                    tanText = "cos(" + tanText + ")";
+                }
+                displayText.clear();
+                displayText.append(tanText);
+                break;
+
             case R.id.equals_button :
 
                 String answer = evaluateExpression();
                 if(answer != null){
                     displayText.clear();
                     displayText.append(answer);
+                    addToHistory(answer);
                 }
 
                 break;
@@ -254,6 +312,35 @@ public class Calculator extends ActionBarActivity implements View.OnClickListene
 
         }
 
+    }
+
+    private void addToHistory(String newHistoryItem) {
+
+        mHistoryList.add(0, newHistoryItem);
+
+        if(mHistoryList.size() > NUM_HISTORY_SAVED){
+            mHistoryList.remove(mHistoryList.size() - 1);
+        }
+
+    }
+
+    protected void showHistoryDialog() {
+
+        String[] historyArray = mHistoryList.toArray(new String[mHistoryList.size()]);
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(R.string.history_dialog_title)
+               .setItems(historyArray, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int position) {
+                        displayText.clear();
+                        displayText.append(mHistoryList.get(position));
+                    }
+               }
+        );
+        AlertDialog dialog = builder.create();
+        dialog.setCanceledOnTouchOutside(true);
+        dialog.show();
     }
 
     protected String evaluateExpression(){
