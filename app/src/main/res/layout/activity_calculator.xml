@@ -3,7 +3,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
-              android:background="#ff343336"
+              android:background="@color/calculator_background"
               android:orientation="vertical"
               android:paddingLeft="8dp"
               android:paddingRight="8dp"
@@ -29,6 +29,7 @@
             android:enabled="true"
             android:focusable="false"
             android:gravity="end|center_vertical"
+            android:maxLines="1"
             android:paddingEnd="5dp"
             android:paddingRight="5dp"
             android:scrollHorizontally="true"
@@ -270,7 +271,6 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:clickable="true"
-            android:text="\u03c0"
             />
 
         <Button
@@ -306,7 +306,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="="
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            />
 
     </LinearLayout>
 

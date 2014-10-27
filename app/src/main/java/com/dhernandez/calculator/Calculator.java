@@ -25,9 +25,8 @@ public class Calculator extends ActionBarActivity implements View.OnClickListene
 
     public static final String TAG = Calculator.class.getSimpleName();
     public static final int NUM_HISTORY_SAVED = 10;
-
-    protected final int DISPLAY_MAX_LENGTH = 20;
-
+    public static final String PI_SYMBOL = "\u03C0";
+    protected static final int DISPLAY_MAX_LENGTH = 40;
     protected EditText displayView;
     protected Button b_clear;
     protected Button b_0;
@@ -49,18 +48,19 @@ public class Calculator extends ActionBarActivity implements View.OnClickListene
     protected Button b_right_parenthesis;
     protected Button b_plusMinus;
     protected Button b_equals;
-
     protected Button b_sin;
     protected Button b_cos;
     protected Button b_tan;
     protected Button b_eulers;
     protected Button b_pi;
-
     protected Button b_backspace;
 
     protected Editable displayText;
 
     protected ArrayList<String> mHistoryList = new ArrayList<String>();
+
+    protected Parser mParser;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,16 +68,21 @@ public class Calculator extends ActionBarActivity implements View.OnClickListene
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calculator);
 
+        Log.d(TAG, "calculator - CREATED");
+
         getSupportActionBar().hide();
 
         //Set activity background color
         getWindow().getDecorView().setBackgroundColor(getResources().getColor(R.color.calculator_background) );
 
-        //Initialize the member view variables
         init();
 
     }
 
+
+    /**
+     * Initialize the member view variables and set their onClick listener to this class
+     */
     private void init() {
 
         displayView = (EditText)findViewById(R.id.display);
@@ -97,6 +102,7 @@ public class Calculator extends ActionBarActivity implements View.OnClickListene
         b_tan = (Button)findViewById(R.id.tan_button);
         b_eulers = (Button)findViewById(R.id.eulers_button);
         b_pi = (Button)findViewById(R.id.pi_button);
+        b_pi.setText(PI_SYMBOL);
 
         b_plusMinus = (Button)findViewById(R.id.plusMinus_button);
         b_0 = (Button)findViewById(R.id.zero_button);
@@ -124,6 +130,8 @@ public class Calculator extends ActionBarActivity implements View.OnClickListene
         b_sin.setOnClickListener(this);
         b_cos.setOnClickListener(this);
         b_tan.setOnClickListener(this);
+        b_eulers.setOnClickListener(this);
+        b_pi.setOnClickListener(this);
         b_plusMinus.setOnClickListener(this);
         b_0.setOnClickListener(this);
         b_1.setOnClickListener(this);
@@ -144,6 +152,8 @@ public class Calculator extends ActionBarActivity implements View.OnClickListene
         b_left_parenthesis.setOnClickListener(this);
         b_right_parenthesis.setOnClickListener(this);
 
+        mParser = new Parser();
+
     }
 
     @Override
@@ -162,150 +172,168 @@ public class Calculator extends ActionBarActivity implements View.OnClickListene
                 break;
 
             case R.id.clear_button:
-                displayText.clear();
+                displayView.setText("");
                 break;
 
             case R.id.backspace_button :
-                int text_length = displayText.length();
+                int text_length = displayView.getText().length();
                 if (text_length > 0){
-                    displayText.delete(text_length-1, text_length);
+                    String txt = displayView.getText().toString();
+                    displayView.setText(txt.substring(0, txt.length()));
                 }
                 break;
 
             case R.id.eulers_button:
-                displayText.append(b_eulers.getText());
+                appendValue(b_eulers.getText());
                 break;
 
             case R.id.pi_button:
-                displayText.append(b_pi.getText());
+                appendValue(b_pi.getText());
                 break;
 
-            //TODO:finish this cdode for plus minus
-            //***ADD CHECK FOR ARRAYOUTOFBOUNDSEXCEPTION for insert method
-            case R.id.plusMinus_button:
-                if(displayText.length() == 0){
-                    displayText.append("-");
+            case R.id.plusMinus_button: {
+
+                String disText = displayView.getText().toString();
+
+                if (disText.isEmpty()) {
+                    appendValue("-");
                 }
-                if(displayText.charAt(0) == '-'){
-                    Toast.makeText(this, "negative", Toast.LENGTH_SHORT);
-                } else if(displayText.charAt(0) == '+') {
-                    Toast.makeText(this, "positive", Toast.LENGTH_SHORT);
+                else if (disText.charAt(0) == '-') {
+                    if(disText.length() == 1){
+                        displayView.setText("");
+                    } else {
+                        displayView.setText( disText.substring(1) );
+                    }
+                } else if (disText.charAt(0) == '+') {
+                    if(disText.length() == 1){
+                        displayView.setText("-");
+                    } else {
+                        displayView.setText("-" + disText.substring(1) );
+                    }
                 } else {
-
+                    disText = "-" + disText;
+                    displayView.setText(disText);
                 }
                 break;
+
+            }
 
             case R.id.zero_button :
-                displayText.append(b_0.getText());
+                appendValue(b_0.getText());
                 break;
 
             case R.id.one_button :
-                displayText.append(b_1.getText());
+                appendValue(b_1.getText());
                 break;
 
             case R.id.two_button :
-                displayText.append(b_2.getText());
+                appendValue(b_2.getText());
                 break;
 
             case R.id.three_button :
-                displayText.append(b_3.getText());
+                appendValue(b_3.getText());
                 break;
 
             case R.id.four_button :
-                displayText.append(b_4.getText());
+                appendValue(b_4.getText());
                 break;
 
             case R.id.five_button :
-                displayText.append(b_5.getText());
+                appendValue(b_5.getText());
                 break;
 
             case R.id.six_button :
-                displayText.append(b_6.getText());
+                appendValue(b_6.getText());
                 break;
 
             case R.id.seven_button :
-                displayText.append(b_7.getText());
+                appendValue(b_7.getText());
                 break;
 
             case R.id.eight_button :
-                displayText.append(b_8.getText());
+                appendValue(b_8.getText());
                 break;
 
             case R.id.nine_button :
-                displayText.append(b_9.getText());
+                appendValue(b_9.getText());
                 break;
 
             case R.id.add_button :
-                displayText.append(b_add.getText());
+                appendValue(b_add.getText());
                 break;
 
             case R.id.subtract_button :
-                displayText.append(b_subtract.getText());
+                appendValue(b_subtract.getText());
                 break;
 
             case R.id.multiply_button :
-                displayText.append(b_multiply.getText());
+                appendValue(b_multiply.getText());
                 break;
 
             case R.id.divide_button :
-                displayText.append(b_divide.getText());
+                appendValue(b_divide.getText());
                 break;
 
             case R.id.period_button :
-                displayText.append(b_period.getText());
+                appendValue(b_period.getText());
                 break;
 
             case R.id.left_parenthesis_button :
-                displayText.append(b_left_parenthesis.getText());
+                appendValue(b_left_parenthesis.getText());
                 break;
 
             case R.id.right_parenthesis_button:
-                displayText.append(b_right_parenthesis.getText());
+                appendValue(b_right_parenthesis.getText());
                 break;
 
-            case R.id.sin_button:
-                String sinText = displayText.toString();
-                if(sinText.isEmpty()){
+            case R.id.sin_button: {
+                String sinText = displayView.getText().toString();
+                if (sinText.isEmpty()) {
                     sinText = "sin(";
                 } else {
                     sinText = "sin(" + sinText + ")";
                 }
-                displayText.clear();
-                displayText.append(sinText);
+                displayView.setText("");
+                appendValue(sinText);
                 break;
+            }
 
-            case R.id.cos_button:
-                String cosText = displayText.toString();
-                if(cosText.isEmpty()){
+            case R.id.cos_button: {
+                String cosText = displayView.getText().toString();
+                if (cosText.isEmpty()) {
                     cosText = "cos(";
                 } else {
                     cosText = "cos(" + cosText + ")";
                 }
-                displayText.clear();
-                displayText.append(cosText);
+                displayView.setText("");
+                appendValue(cosText);
                 break;
+            }
 
-            case R.id.tan_button:
-                String tanText = displayText.toString();
-                if(tanText.isEmpty()){
+            case R.id.tan_button: {
+                String tanText = displayView.getText().toString();
+                if (tanText.isEmpty()) {
                     tanText = "cos(";
                 } else {
                     tanText = "cos(" + tanText + ")";
                 }
-                displayText.clear();
-                displayText.append(tanText);
+                displayView.setText("");
+                appendValue(tanText);
                 break;
+            }
 
-            case R.id.equals_button :
-
-                String answer = evaluateExpression();
-                if(answer != null){
-                    displayText.clear();
-                    displayText.append(answer);
-                    addToHistory(answer);
+            case R.id.equals_button : {
+                String exprStr = displayView.getText().toString();
+                if (!exprStr.isEmpty()) {
+                    String answer = evaluateExpression(exprStr);
+                    if (answer != null) {
+                        displayView.setText("");
+                        appendValue(answer);
+                        addToHistory(answer);
+                    }
                 }
-
                 break;
+            }
 
             default:
                 break;
@@ -314,7 +342,26 @@ public class Calculator extends ActionBarActivity implements View.OnClickListene
 
     }
 
+    /**
+     * Append the string passed in to the display.
+     *
+     * @param str  the string to append
+     */
+    private void appendValue(CharSequence str){
+        displayView.append(str);
+    }
+
+    /**
+     * Add the last computed value to the front of history list. The last item in the list will be
+     * removed whenever the list size exceeds the capacity specified in the constant NUM_HISTORY_SAVED
+     *
+     * @param newHistoryItem  new value to add to history list
+     */
     private void addToHistory(String newHistoryItem) {
+
+        if(!mHistoryList.isEmpty() && newHistoryItem.equals(mHistoryList.get(0))){
+            return;
+        }
 
         mHistoryList.add(0, newHistoryItem);
 
@@ -333,8 +380,12 @@ public class Calculator extends ActionBarActivity implements View.OnClickListene
                .setItems(historyArray, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int position) {
-                        displayText.clear();
-                        displayText.append(mHistoryList.get(position));
+                        displayView.setText("");
+                        appendValue(mHistoryList.get(position));
+
+
+                        //TODO: decide if I want to clear the field or just append the chosen result to it
+                        //*if you decide to clear you must save last result in order to use it with next expression
                     }
                }
         );
@@ -343,16 +394,32 @@ public class Calculator extends ActionBarActivity implements View.OnClickListene
         dialog.show();
     }
 
-    protected String evaluateExpression(){
+    /**
+     * Computes the value of the expression using the CogPar
+     * mathematical expression parser.
+     *
+     * @param   expStr  expression to be evaluated
+     * @return          string containing the value of the expression
+     */
+    protected String evaluateExpression(String expStr){
 
-        String exprStr = displayText.toString();
+        /* TODO : finish implementing PI, make sure it is well tested for all possible inputs
 
-        Parser parser = new Parser();
-        try
-        {
-            ExpressionNode expr = parser.parse(exprStr);
+                e.g. 2pi | pi | pi2 | pitan | tanpi
+        */
+
+        try {
+            Log.d(TAG, "original -> " + expStr);
+            expStr = expStr.replaceAll("(\\w)"+PI_SYMBOL+"(\\w)", "$1*pi*$2");
+            expStr = expStr.replaceAll("(\\w)"+PI_SYMBOL, "$1*pi");
+            expStr = expStr.replaceAll(PI_SYMBOL+"(\\w)", "pi*$1");
+            expStr = expStr.replaceAll("^"+PI_SYMBOL+"$", "pi");
+            Log.d(TAG, "new -> " + expStr);
+            ExpressionNode expr = mParser.parse(expStr);
+
             expr.accept(new SetVariable("pi", Math.PI));
-            Log.v(TAG, "The value of the expression is "+expr.getValue());
+
+            Log.v(TAG, "The value of the expression is " + expr.getValue());
             return expr.getValue()+"";
         }
         catch (ParserException e)
@@ -370,4 +437,39 @@ public class Calculator extends ActionBarActivity implements View.OnClickListene
 
     }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Log.d(TAG, "calculator - PAUSED");
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        Log.d(TAG, "calculator - RESTARTED");
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Log.d(TAG, "calculator - STOPPED");
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Log.d(TAG, "calculator - DESTROYED");
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.d(TAG, "calculator - RESUMED");
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Log.d(TAG, "calculator - started (NOT restart!!)");
+    }
 }

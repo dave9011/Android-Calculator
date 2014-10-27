@@ -2,10 +2,22 @@
 <resources>
 
     <color name="calculator_button_background">#efefef</color>
-    <color name="calculator_background">#efefef</color>
+    <color name="calculator_background">#343336</color>
     <color name="apptheme_color">#ff4444</color>
     <color name="display_background">#D1D5D8</color>
 
     <color name="action_bar_color">#FBA026</color>
+
+    <color name="number_btn_default">#E25041</color>
+    <color name="num_btn_pressed_color">#b03f32</color>
+
+    <color name="operator_btn_default">#00A885</color>
+    <color name="operator_btn_pressed">#007e63</color>
+
+    <color name="button_altColor_1_default">#00A885</color>
+    <color name="button_altColor_1_pressed">#007e63</color>
+
+    <color name="button_altColor_2_default">#FBA026</color>
+    <color name="button_altColor_2_pressed">#ffc9801e</color>
 
 </resources>
