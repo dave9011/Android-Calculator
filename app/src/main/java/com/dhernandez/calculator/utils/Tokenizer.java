@@ -108,7 +108,7 @@ public class Tokenizer
   /**
    * Tokenize an input string.
    *
-   * The reult of tokenizing can be accessed via getTokens
+   * The result of tokenizing can be accessed via getTokens
    *
    * @param str the string to tokenize
    */

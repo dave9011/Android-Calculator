@@ -1,15 +1,18 @@
 package com.dhernandez.calculator;
 
 import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.text.Editable;
 import android.text.InputFilter;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import com.dhernandez.calculator.utils.EvaluationException;
@@ -27,6 +30,7 @@ public class Calculator extends ActionBarActivity implements View.OnClickListene
     public static final int NUM_HISTORY_SAVED = 10;
     public static final String PI_SYMBOL = "\u03C0";
     protected static final int DISPLAY_MAX_LENGTH = 40;
+
     protected EditText displayView;
     protected Button b_clear;
     protected Button b_0;
@@ -176,10 +180,11 @@ public class Calculator extends ActionBarActivity implements View.OnClickListene
                 break;
 
             case R.id.backspace_button :
+
                 int text_length = displayView.getText().length();
                 if (text_length > 0){
                     String txt = displayView.getText().toString();
-                    displayView.setText(txt.substring(0, txt.length()));
+                    displayView.setText(txt.substring(0, txt.length()-1));
                 }
                 break;
 
@@ -376,22 +381,38 @@ public class Calculator extends ActionBarActivity implements View.OnClickListene
         String[] historyArray = mHistoryList.toArray(new String[mHistoryList.size()]);
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle(R.string.history_dialog_title)
-               .setItems(historyArray, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int position) {
-                        displayView.setText("");
-                        appendValue(mHistoryList.get(position));
+        builder.setTitle(R.string.history_dialog_title);
+//               .setItems(historyArray, new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialogInterface, int position) {
+//                        displayView.setText("");
+//                        appendValue(mHistoryList.get(position));
+//
+//
+//                        //TODO: decide if I want to clear the field or just append the chosen result to it
+//                        //*if you decide to clear you must save last result in order to use it with next expression
+//                    }
+//               }
+//        );
 
+        LayoutInflater inflater = getLayoutInflater();
+        View convertView = (View) inflater.inflate(R.layout.custom_list_dialog, null);
+        builder.setView(convertView);
+        ListView listView = (ListView)convertView.findViewById(R.id.history_list_view);
 
-                        //TODO: decide if I want to clear the field or just append the chosen result to it
-                        //*if you decide to clear you must save last result in order to use it with next expression
-                    }
-               }
-        );
-        AlertDialog dialog = builder.create();
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, historyArray);
+        listView.setAdapter(adapter);
+        final AlertDialog dialog = builder.create();
         dialog.setCanceledOnTouchOutside(true);
         dialog.show();
+        listView.setOnItemClickListener( new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                displayView.setText("");
+                appendValue(mHistoryList.get(position));
+                dialog.dismiss();
+            }
+        });
     }
 
     /**
@@ -403,29 +424,39 @@ public class Calculator extends ActionBarActivity implements View.OnClickListene
      */
     protected String evaluateExpression(String expStr){
 
-        /* TODO : finish implementing PI, make sure it is well tested for all possible inputs
-
-                e.g. 2pi | pi | pi2 | pitan | tanpi
-        */
+        //Variable that keeps track of whether the user used PI in the current expression
+        boolean usesPI = false;
 
         try {
-            Log.d(TAG, "original -> " + expStr);
-            expStr = expStr.replaceAll("(\\w)"+PI_SYMBOL+"(\\w)", "$1*pi*$2");
-            expStr = expStr.replaceAll("(\\w)"+PI_SYMBOL, "$1*pi");
-            expStr = expStr.replaceAll(PI_SYMBOL+"(\\w)", "pi*$1");
-            expStr = expStr.replaceAll("^"+PI_SYMBOL+"$", "pi");
-            Log.d(TAG, "new -> " + expStr);
+
+            if(expStr.contains(PI_SYMBOL)){
+                expStr = expStr.replaceAll(PI_SYMBOL, "pi");
+                usesPI = true;
+            }
+
             ExpressionNode expr = mParser.parse(expStr);
 
             expr.accept(new SetVariable("pi", Math.PI));
 
+            String result = expr.getValue()+"";
+
             Log.v(TAG, "The value of the expression is " + expr.getValue());
-            return expr.getValue()+"";
+
+            return result;
+
         }
         catch (ParserException e)
         {
             Log.e(TAG, e.getMessage());
-            Toast.makeText(this, "Unable to evaluate that expression!", Toast.LENGTH_SHORT).show();
+            if(usesPI == true){
+                //TODO : MAKE THIS AN ALERT DIALOG
+                Toast.makeText(this,
+                        "Please include operator (+,-,/,*) between " + PI_SYMBOL + " and adjacent numbers or parentheses.",
+                        Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(this, "Unable to evaluate that expression!", Toast.LENGTH_SHORT).show();
+            }
+
         }
         catch (EvaluationException e)
         {

@@ -9,7 +9,7 @@ package com.dhernandez.calculator.utils;
      Parser parser = new Parser();
      try
      {
-       ExpressionNode expr = parser.parse("pi");
+       ExpressionNode expr = parser.parse("2*pi");
        expr.accept(new SetVariable("pi", Math.PI));
        System.out.println("The value of the expression is "+expr.getValue());
 

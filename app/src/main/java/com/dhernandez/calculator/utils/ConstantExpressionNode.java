@@ -52,7 +52,7 @@ public class ConstantExpressionNode implements ExpressionNode
    */
   public ConstantExpressionNode(String value)
   {
-    this.value = Double.valueOf(value);
+      this.value = Double.valueOf(value);
   }
 
   /**
