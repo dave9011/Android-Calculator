@@ -23,7 +23,7 @@
             android:layout_width="0dp"
             android:layout_height="fill_parent"
             android:layout_marginLeft="2dp"
-            android:layout_marginRight="10dp"
+            android:layout_marginRight="2dp"
             android:layout_weight="1"
             android:background="@color/display_background"
             android:editable="true"
@@ -32,20 +32,14 @@
             android:focusable="false"
             android:gravity="end|center_vertical"
             android:maxLines="1"
+            android:paddingBottom="10dp"
             android:paddingEnd="5dp"
             android:paddingRight="5dp"
+            android:paddingTop="10dp"
             android:scrollHorizontally="true"
             android:singleLine="true"
             android:textColor="@android:color/black"
-            android:textSize="23sp"/>
-
-        <Button
-            android:id="@+id/backspace_button"
-            style="@style/OperatorButton"
-            android:layout_width="wrap_content"
-            android:layout_height="fill_parent"
-            android:layout_marginRight="2dp"
-            android:text="\u003c="/>
+            android:textSize="35sp"/>
 
 
     </LinearLayout>
@@ -104,6 +98,17 @@
             android:clickable="true"
             android:text="ln"
             android:textStyle="bold"/>
+
+        <Button
+            android:id="@+id/keyboardButton"
+            style="@style/OperatorButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:text="key"
+            android:textStyle="bold"
+            />
 
     </LinearLayout>
 
@@ -170,27 +175,6 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/keyboardButton"
-            style="@style/OperatorButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:clickable="true"
-            android:text="key..d"
-            android:textStyle="bold"
-            />
-
-        <Button
-            android:id="@+id/clear_button"
-            style="@style/OperatorButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:clickable="true"
-            android:text="C"
-            android:textStyle="bold"/>
-
-        <Button
             android:id="@+id/left_parenthesis_button"
             style="@style/ButtonAltColor1"
             android:layout_width="wrap_content"
@@ -211,22 +195,23 @@
             android:textStyle="bold"/>
 
         <Button
-            android:id="@+id/divide_button"
+            android:id="@+id/eulers_button"
             style="@style/OperatorButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:clickable="true"
-            android:text="/"
-            android:textStyle="bold"
+            android:text="e"
             />
 
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        <Button
+            android:id="@+id/pi_button"
+            style="@style/OperatorButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:text="pi"/>
 
         <Button
             android:id="@+id/mod_button"
@@ -237,6 +222,13 @@
             android:clickable="true"
             android:text="%"
             android:textStyle="bold"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
         <Button
             android:id="@+id/one_button"
@@ -263,14 +255,22 @@
             android:text="3"/>
 
         <Button
-            android:id="@+id/multiply_button"
+            android:id="@+id/backspace_button"
+            style="@style/OperatorButton"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:text="\u003c="/>
+
+        <Button
+            android:id="@+id/clear_button"
             style="@style/OperatorButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="*"
-            android:textStyle="bold"
-            />
+            android:clickable="true"
+            android:text="C"
+            android:textStyle="bold"/>
 
     </LinearLayout>
 
@@ -278,16 +278,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/eulers_button"
-            style="@style/OperatorButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:clickable="true"
-            android:text="e"
-            />
 
         <Button
             android:id="@+id/four_button"
@@ -314,12 +304,23 @@
             android:text="6"/>
 
         <Button
-            android:id="@+id/subtract_button"
+            android:id="@+id/multiply_button"
             style="@style/OperatorButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="-"
+            android:text="*"
+            android:textStyle="bold"
+            />
+
+        <Button
+            android:id="@+id/divide_button"
+            style="@style/OperatorButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:text="/"
             android:textStyle="bold"
             />
 
@@ -329,15 +330,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/pi_button"
-            style="@style/OperatorButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:clickable="true"
-            android:text="pi"/>
 
         <Button
             android:id="@+id/seven_button"
@@ -373,6 +365,16 @@
             android:textStyle="bold"
             />
 
+        <Button
+            android:id="@+id/subtract_button"
+            style="@style/OperatorButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="-"
+            android:textStyle="bold"
+            />
+
     </LinearLayout>
 
     <LinearLayout
@@ -381,14 +383,12 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/ans_button"
-            style="@style/OperatorButton"
+            android:id="@+id/zero_button"
+            style="@style/NumberButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:clickable="true"
-            android:text="Ans"
-            android:textStyle="bold"/>
+            android:text="0"/>
 
         <Button
             android:id="@+id/period_button"
@@ -400,20 +400,22 @@
             android:textStyle="bold"/>
 
         <Button
-            android:id="@+id/zero_button"
-            style="@style/NumberButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="0"/>
-
-        <Button
             android:id="@+id/plusMinus_button"
             style="@style/ButtonAltColor1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="+/-"
+            android:textStyle="bold"/>
+
+        <Button
+            android:id="@+id/ans_button"
+            style="@style/OperatorButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:text="Ans"
             android:textStyle="bold"/>
 
         <Button

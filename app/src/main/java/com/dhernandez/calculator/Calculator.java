@@ -5,9 +5,13 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.text.Editable;
+import android.text.Html;
 import android.text.InputFilter;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
@@ -101,15 +105,11 @@ public class Calculator extends ActionBarActivity implements View.OnClickListene
 
     }
 
-
-    /**
-     * Initialize the member view variables and set their onClick listener to this class
-     */
     private void init() {
 
         displayView = (EditText)findViewById(R.id.display);
 
-        //TODO: remvove this and member variable, and onClickListner switch case, also uncomment line below that disables display
+        //TODO: remove this and member variable, and onClickListner switch case, also uncomment line below that disables display
         b_keyboard = (Button)findViewById(R.id.keyboardButton);
         b_keyboard.setOnClickListener(this);
 
@@ -124,18 +124,66 @@ public class Calculator extends ActionBarActivity implements View.OnClickListene
         displayText = displayView.getText();
         displayText.setFilters( new InputFilter[]{ new InputFilter.LengthFilter(DISPLAY_MAX_LENGTH)} );
 
+        b_clear = (Button)findViewById(R.id.clear_button);
         b_backspace = (Button)findViewById(R.id.backspace_button);
 
-        b_clear = (Button)findViewById(R.id.clear_button);
-
-        b_sin = (Button)findViewById(R.id.sin_button);
-        b_cos = (Button)findViewById(R.id.cos_button);
-        b_tan = (Button)findViewById(R.id.tan_button);
         b_eulers = (Button)findViewById(R.id.eulers_button);
         b_pi = (Button)findViewById(R.id.pi_button);
 
+        b_period = (Button)findViewById(R.id.period_button);
+        b_left_parenthesis = (Button)findViewById(R.id.left_parenthesis_button);
+        b_right_parenthesis = (Button)findViewById(R.id.right_parenthesis_button);
+
         b_ans = (Button)findViewById(R.id.ans_button);
+
+        displayView.setOnClickListener(this);
+
+        b_clear.setOnClickListener(this);
+        b_backspace.setOnClickListener(this);
+
+        b_eulers.setOnClickListener(this);
+        b_pi.setOnClickListener(this);
+
+        b_period.setOnClickListener(this);
+        b_left_parenthesis.setOnClickListener(this);
+        b_right_parenthesis.setOnClickListener(this);
+
+        b_ans.setOnClickListener(this);
+
+
+
+        setOperatorButtonVariables();
+        setFunctionButtonVariables();
+        setNumberButtonVariables();
+
+        setButtonSpecialSymbols();
+
+        mParser = new Parser();
+
+    }
+
+    private void setOperatorButtonVariables(){
         b_mod = (Button)findViewById(R.id.mod_button);
+        b_plusMinus = (Button)findViewById(R.id.plusMinus_button);
+        b_divide = (Button)findViewById(R.id.divide_button);
+        b_multiply = (Button)findViewById(R.id.multiply_button);
+        b_add = (Button)findViewById(R.id.add_button);
+        b_subtract = (Button)findViewById(R.id.subtract_button);
+        b_equals = (Button)findViewById(R.id.equals_button);
+
+        b_mod.setOnClickListener(this);
+        b_plusMinus.setOnClickListener(this);
+        b_divide.setOnClickListener(this);
+        b_multiply.setOnClickListener(this);
+        b_add.setOnClickListener(this);
+        b_subtract.setOnClickListener(this);
+        b_equals.setOnClickListener(this);
+    }
+
+    private void setFunctionButtonVariables(){
+        b_sin = (Button)findViewById(R.id.sin_button);
+        b_cos = (Button)findViewById(R.id.cos_button);
+        b_tan = (Button)findViewById(R.id.tan_button);
         b_sqrt = (Button)findViewById(R.id.square_root_button);
         b_exp_2 = (Button)findViewById(R.id.exponent_2_button);
         b_exp_3 = (Button)findViewById(R.id.exponent_3_button);
@@ -144,8 +192,19 @@ public class Calculator extends ActionBarActivity implements View.OnClickListene
         b_ln = (Button)findViewById(R.id.natural_log_button);
         b_reciprocal = (Button)findViewById(R.id.reciprocal_button);
 
+        b_sin.setOnClickListener(this);
+        b_cos.setOnClickListener(this);
+        b_tan.setOnClickListener(this);
+        b_sqrt.setOnClickListener(this);
+        b_exp_2.setOnClickListener(this);
+        b_exp_3.setOnClickListener(this);
+        b_exp_n.setOnClickListener(this);
+        b_log.setOnClickListener(this);
+        b_ln.setOnClickListener(this);
+        b_reciprocal.setOnClickListener(this);
+    }
 
-        b_plusMinus = (Button)findViewById(R.id.plusMinus_button);
+    private void setNumberButtonVariables(){
         b_0 = (Button)findViewById(R.id.zero_button);
         b_1 = (Button)findViewById(R.id.one_button);
         b_2 = (Button)findViewById(R.id.two_button);
@@ -156,24 +215,7 @@ public class Calculator extends ActionBarActivity implements View.OnClickListene
         b_7 = (Button)findViewById(R.id.seven_button);
         b_8 = (Button)findViewById(R.id.eight_button);
         b_9 = (Button)findViewById(R.id.nine_button);
-        b_divide = (Button)findViewById(R.id.divide_button);
-        b_multiply = (Button)findViewById(R.id.multiply_button);
-        b_add = (Button)findViewById(R.id.add_button);
-        b_subtract = (Button)findViewById(R.id.subtract_button);
-        b_equals = (Button)findViewById(R.id.equals_button);
-        b_period = (Button)findViewById(R.id.period_button);
-        b_left_parenthesis = (Button)findViewById(R.id.left_parenthesis_button);
-        b_right_parenthesis = (Button)findViewById(R.id.right_parenthesis_button);
 
-        displayView.setOnClickListener(this);
-        b_clear.setOnClickListener(this);
-        b_backspace.setOnClickListener(this);
-        b_sin.setOnClickListener(this);
-        b_cos.setOnClickListener(this);
-        b_tan.setOnClickListener(this);
-        b_eulers.setOnClickListener(this);
-        b_pi.setOnClickListener(this);
-        b_plusMinus.setOnClickListener(this);
         b_0.setOnClickListener(this);
         b_1.setOnClickListener(this);
         b_2.setOnClickListener(this);
@@ -184,29 +226,6 @@ public class Calculator extends ActionBarActivity implements View.OnClickListene
         b_7.setOnClickListener(this);
         b_8.setOnClickListener(this);
         b_9.setOnClickListener(this);
-        b_divide.setOnClickListener(this);
-        b_multiply.setOnClickListener(this);
-        b_add.setOnClickListener(this);
-        b_subtract.setOnClickListener(this);
-        b_equals.setOnClickListener(this);
-        b_period.setOnClickListener(this);
-        b_left_parenthesis.setOnClickListener(this);
-        b_right_parenthesis.setOnClickListener(this);
-
-        b_ans.setOnClickListener(this);
-        b_mod.setOnClickListener(this);
-        b_sqrt.setOnClickListener(this);
-        b_exp_2.setOnClickListener(this);
-        b_exp_3.setOnClickListener(this);
-        b_exp_n.setOnClickListener(this);
-        b_log.setOnClickListener(this);
-        b_ln.setOnClickListener(this);
-        b_reciprocal.setOnClickListener(this);
-
-        setButtonSpecialSymbols();
-
-        mParser = new Parser();
-
     }
 
     protected void setButtonSpecialSymbols(){
@@ -223,6 +242,41 @@ public class Calculator extends ActionBarActivity implements View.OnClickListene
 
             //TODO: add cases for new buttons
 
+            case R.id.square_root_button: {
+                String text = displayView.getText().toString();
+                appendFunction(text, "sqrt");
+                break;
+            }
+
+            case R.id.natural_log_button: {
+                String text = displayView.getText().toString();
+                appendFunction(text, "ln");
+                break;
+            }
+
+            case R.id.log_button: {
+                String text = displayView.getText().toString();
+                appendFunction(text, "log");
+                break;
+            }
+
+            case R.id.exponent_2_button: {
+                String text = displayView.getText().toString();
+                handleExponentiation(text, "2");
+                break;
+            }
+
+            case R.id.exponent_3_button: {
+                String text = displayView.getText().toString();
+                handleExponentiation(text, "3");
+                break;
+            }
+
+            //TODO: finish this
+            case R.id.exponent_n_button:
+                displayView.setText(Html.fromHtml("x<sup>n</sup>"));
+                break;
+
             //TODO: remove this
             case R.id.keyboardButton:
                 InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -238,7 +292,6 @@ public class Calculator extends ActionBarActivity implements View.OnClickListene
                 break;
 
             case R.id.backspace_button :
-
                 int text_length = displayView.getText().length();
                 if (text_length > 0){
                     String txt = displayView.getText().toString();
@@ -255,30 +308,9 @@ public class Calculator extends ActionBarActivity implements View.OnClickListene
                 break;
 
             case R.id.plusMinus_button: {
-
                 String disText = displayView.getText().toString();
-
-                if (disText.isEmpty()) {
-                    appendValue("-");
-                }
-                else if (disText.charAt(0) == '-') {
-                    if(disText.length() == 1){
-                        displayView.setText("");
-                    } else {
-                        displayView.setText( disText.substring(1) );
-                    }
-                } else if (disText.charAt(0) == '+') {
-                    if(disText.length() == 1){
-                        displayView.setText("-");
-                    } else {
-                        displayView.setText("-" + disText.substring(1) );
-                    }
-                } else {
-                    disText = "-" + disText;
-                    displayView.setText(disText);
-                }
+                handlePlusMinus(disText);
                 break;
-
             }
 
             case R.id.zero_button :
@@ -350,50 +382,27 @@ public class Calculator extends ActionBarActivity implements View.OnClickListene
                 break;
 
             case R.id.sin_button: {
-                String sinText = displayView.getText().toString();
-                if (sinText.isEmpty()) {
-                    sinText = "sin(";
-                } else {
-                    sinText = "sin(" + sinText + ")";
-                }
-                displayView.setText("");
-                appendValue(sinText);
+                String text = displayView.getText().toString();
+                appendFunction(text, "sin");
                 break;
             }
 
             case R.id.cos_button: {
-                String cosText = displayView.getText().toString();
-                if (cosText.isEmpty()) {
-                    cosText = "cos(";
-                } else {
-                    cosText = "cos(" + cosText + ")";
-                }
-                displayView.setText("");
-                appendValue(cosText);
+                String text = displayView.getText().toString();
+                appendFunction(text, "cos");
                 break;
             }
 
             case R.id.tan_button: {
-                String tanText = displayView.getText().toString();
-                if (tanText.isEmpty()) {
-                    tanText = "tan(";
-                } else {
-                    tanText = "tan(" + tanText + ")";
-                }
-                displayView.setText("");
-                appendValue(tanText);
+                String text = displayView.getText().toString();
+                appendFunction(text, "tan");
                 break;
             }
 
             case R.id.equals_button : {
                 String exprStr = displayView.getText().toString();
                 if (!exprStr.isEmpty()) {
-                    String answer = evaluateExpression(exprStr);
-                    if (answer != null) {
-                        displayView.setText("");
-                        appendValue(answer);
-                        addToHistory(exprStr, answer);
-                    }
+                    evaluateExpression(exprStr);
                 }
                 break;
             }
@@ -403,6 +412,53 @@ public class Calculator extends ActionBarActivity implements View.OnClickListene
 
         }
 
+    }
+
+    private void handleExponentiation(String text, String power) {
+        text = "(" + text + ")^" + power;
+        evaluateExpression(text);
+    }
+
+    private void appendFunction(String text, String function) {
+        if(text.isEmpty()){
+            displayView.setText( function + "(" );
+        }
+        else {
+            displayView.setText( function + "(" + text + ")" );
+        }
+    }
+
+    //TODO: delete this, no longer necessary with appendFunction
+    private void handleTrigFunction(String text, String trigFunction) {
+        if (text.isEmpty()) {
+            text = trigFunction + "(";
+        } else {
+            text = trigFunction + "(" + text + ")";
+        }
+        displayView.setText("");
+        appendValue(text);
+    }
+
+    private void handlePlusMinus(String disText) {
+        if (disText.isEmpty()) {
+            appendValue("-");
+        }
+        else if (disText.charAt(0) == '-') {
+            if(disText.length() == 1){
+                displayView.setText("");
+            } else {
+                displayView.setText( disText.substring(1) );
+            }
+        } else if (disText.charAt(0) == '+') {
+            if(disText.length() == 1){
+                displayView.setText("-");
+            } else {
+                displayView.setText("-" + disText.substring(1) );
+            }
+        } else {
+            disText = "-" + disText;
+            displayView.setText(disText);
+        }
     }
 
     /**
@@ -435,6 +491,12 @@ public class Calculator extends ActionBarActivity implements View.OnClickListene
 
     }
 
+    /**
+     * Creates a custom AlertDialog that displays the history.
+     *
+     * Displays the expression and result of each HistoryItem object in mHistoryList using the
+     * custom adapter, HistoryAdapter.
+     */
     protected void showHistoryDialog() {
 
         //String[] historyArray = mHistoryList.toArray(new String[mHistoryList.size()]);
@@ -444,7 +506,7 @@ public class Calculator extends ActionBarActivity implements View.OnClickListene
         //TODO: decide if I want to clear the field or just append the chosen result to it
 
         LayoutInflater inflater = getLayoutInflater();
-        View convertView = (View) inflater.inflate(R.layout.dialog_history, null);
+        View convertView = (View)inflater.inflate(R.layout.dialog_history, null);
         builder.setView(convertView);
         ListView listView = (ListView)convertView.findViewById(R.id.list);
         listView.setEmptyView(convertView.findViewById(R.id.empty));
@@ -473,7 +535,9 @@ public class Calculator extends ActionBarActivity implements View.OnClickListene
      * @param   expStr  expression to be evaluated
      * @return          string containing the value of the expression
      */
-    protected String evaluateExpression(String expStr){
+    protected void evaluateExpression(String expStr){
+
+        String originalExpression = expStr;
 
         //Variable that keeps track of whether the user used PI in the current expression
         boolean usesPI = false;
@@ -493,7 +557,11 @@ public class Calculator extends ActionBarActivity implements View.OnClickListene
 
             Log.v(TAG, "The value of the expression is " + expr.getValue());
 
-            return result;
+            if (result != null) {
+                displayView.setText("");
+                appendValue(result);
+                addToHistory(originalExpression, result);
+            }
 
         }
         catch (ParserException e)
@@ -515,8 +583,29 @@ public class Calculator extends ActionBarActivity implements View.OnClickListene
             Toast.makeText(this, "Unable to evaluate that expression!", Toast.LENGTH_SHORT).show();
         }
 
-        return null;
+    }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu items for use in the action bar
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.calculator, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch(item.getItemId()){
+
+            case R.id.action_clear_history:
+                mHistoryList.clear();
+                Toast.makeText(this, getString(R.string.history_cleared_message), Toast.LENGTH_SHORT).show();
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+
+        }
     }
 
     @Override
@@ -555,6 +644,10 @@ public class Calculator extends ActionBarActivity implements View.OnClickListene
         Log.d(TAG, "calculator - started (NOT restart!!)");
     }
 
+    /**
+     * Inner class used to store a history entry, including the expression and the expression's
+     * result.
+     */
     protected class HistoryItem {
 
         private String mExpression;
@@ -574,4 +667,5 @@ public class Calculator extends ActionBarActivity implements View.OnClickListene
         }
 
     }
+
 }

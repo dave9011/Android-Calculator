@@ -23,8 +23,8 @@
     </style>
 
     <style name="ButtonAppTheme" parent="android:Widget.Button">
-        <item name="android:minHeight">48dip</item>
-        <item name="android:minWidth">64dip</item>
+       <!-- <item name="android:minHeight">48dip</item>
+        <item name="android:minWidth">64dip</item> -->
         <item name="android:textColor">@android:color/white</item>
         <item name="android:textStyle">bold</item>
     </style>
