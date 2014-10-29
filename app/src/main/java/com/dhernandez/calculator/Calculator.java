@@ -1,6 +1,7 @@
 package com.dhernandez.calculator;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.text.Editable;
@@ -8,8 +9,8 @@ import android.text.InputFilter;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -24,11 +25,16 @@ import com.dhernandez.calculator.utils.SetVariable;
 import java.util.ArrayList;
 
 
+//TODO: clean up drawable folders (unused apptheme resources)
+//TODO: add a clear history option
+
 public class Calculator extends ActionBarActivity implements View.OnClickListener {
 
     public static final String TAG = Calculator.class.getSimpleName();
     public static final int NUM_HISTORY_SAVED = 10;
     public static final String PI_SYMBOL = "\u03C0";
+    public static final String SQRT_SYMBOL = "\u221A";
+
     protected static final int DISPLAY_MAX_LENGTH = 40;
 
     protected EditText displayView;
@@ -59,9 +65,21 @@ public class Calculator extends ActionBarActivity implements View.OnClickListene
     protected Button b_pi;
     protected Button b_backspace;
 
+    protected Button b_ans;
+    protected Button b_keyboard;
+    protected Button b_mod;
+    protected Button b_sqrt;
+    protected Button b_exp_2;
+    protected Button b_exp_3;
+    protected Button b_exp_n;
+    protected Button b_log;
+    protected Button b_ln;
+    protected Button b_reciprocal;
+
+
     protected Editable displayText;
 
-    protected ArrayList<String> mHistoryList = new ArrayList<String>();
+    protected ArrayList<HistoryItem> mHistoryList = new ArrayList<HistoryItem>();
 
     protected Parser mParser;
 
@@ -91,8 +109,17 @@ public class Calculator extends ActionBarActivity implements View.OnClickListene
 
         displayView = (EditText)findViewById(R.id.display);
 
-        displayView.setFocusable(false);
+        //TODO: remvove this and member variable, and onClickListner switch case, also uncomment line below that disables display
+        b_keyboard = (Button)findViewById(R.id.keyboardButton);
+        b_keyboard.setOnClickListener(this);
+
+
+        //TODO:make display view NOT editable in xml
+        displayView.setFocusable(true);
         displayView.setClickable(true);
+
+        //displayView.setFocusable(false);
+        //displayView.setClickable(true);
 
         displayText = displayView.getText();
         displayText.setFilters( new InputFilter[]{ new InputFilter.LengthFilter(DISPLAY_MAX_LENGTH)} );
@@ -106,7 +133,17 @@ public class Calculator extends ActionBarActivity implements View.OnClickListene
         b_tan = (Button)findViewById(R.id.tan_button);
         b_eulers = (Button)findViewById(R.id.eulers_button);
         b_pi = (Button)findViewById(R.id.pi_button);
-        b_pi.setText(PI_SYMBOL);
+
+        b_ans = (Button)findViewById(R.id.ans_button);
+        b_mod = (Button)findViewById(R.id.mod_button);
+        b_sqrt = (Button)findViewById(R.id.square_root_button);
+        b_exp_2 = (Button)findViewById(R.id.exponent_2_button);
+        b_exp_3 = (Button)findViewById(R.id.exponent_3_button);
+        b_exp_n = (Button)findViewById(R.id.exponent_n_button);
+        b_log = (Button)findViewById(R.id.log_button);
+        b_ln = (Button)findViewById(R.id.natural_log_button);
+        b_reciprocal = (Button)findViewById(R.id.reciprocal_button);
+
 
         b_plusMinus = (Button)findViewById(R.id.plusMinus_button);
         b_0 = (Button)findViewById(R.id.zero_button);
@@ -156,8 +193,25 @@ public class Calculator extends ActionBarActivity implements View.OnClickListene
         b_left_parenthesis.setOnClickListener(this);
         b_right_parenthesis.setOnClickListener(this);
 
+        b_ans.setOnClickListener(this);
+        b_mod.setOnClickListener(this);
+        b_sqrt.setOnClickListener(this);
+        b_exp_2.setOnClickListener(this);
+        b_exp_3.setOnClickListener(this);
+        b_exp_n.setOnClickListener(this);
+        b_log.setOnClickListener(this);
+        b_ln.setOnClickListener(this);
+        b_reciprocal.setOnClickListener(this);
+
+        setButtonSpecialSymbols();
+
         mParser = new Parser();
 
+    }
+
+    protected void setButtonSpecialSymbols(){
+        b_pi.setText(PI_SYMBOL);
+        b_sqrt.setText(SQRT_SYMBOL);
     }
 
     @Override
@@ -167,12 +221,16 @@ public class Calculator extends ActionBarActivity implements View.OnClickListene
 
         switch(button_id) {
 
+            //TODO: add cases for new buttons
+
+            //TODO: remove this
+            case R.id.keyboardButton:
+                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.toggleSoftInput(InputMethodManager.SHOW_FORCED,0);
+                break;
+
             case R.id.display:
-                if(mHistoryList != null && !mHistoryList.isEmpty() ){
-                    showHistoryDialog();
-                } else {
-                    Toast.makeText(this, "No history to show", Toast.LENGTH_SHORT).show();
-                }
+                showHistoryDialog();
                 break;
 
             case R.id.clear_button:
@@ -318,9 +376,9 @@ public class Calculator extends ActionBarActivity implements View.OnClickListene
             case R.id.tan_button: {
                 String tanText = displayView.getText().toString();
                 if (tanText.isEmpty()) {
-                    tanText = "cos(";
+                    tanText = "tan(";
                 } else {
-                    tanText = "cos(" + tanText + ")";
+                    tanText = "tan(" + tanText + ")";
                 }
                 displayView.setText("");
                 appendValue(tanText);
@@ -334,7 +392,7 @@ public class Calculator extends ActionBarActivity implements View.OnClickListene
                     if (answer != null) {
                         displayView.setText("");
                         appendValue(answer);
-                        addToHistory(answer);
+                        addToHistory(exprStr, answer);
                     }
                 }
                 break;
@@ -360,15 +418,16 @@ public class Calculator extends ActionBarActivity implements View.OnClickListene
      * Add the last computed value to the front of history list. The last item in the list will be
      * removed whenever the list size exceeds the capacity specified in the constant NUM_HISTORY_SAVED
      *
-     * @param newHistoryItem  new value to add to history list
+     * @param expression        expression to add to history list
+     * @param expressionResult  result of expression to add to history list
      */
-    private void addToHistory(String newHistoryItem) {
+    private void addToHistory(String expression, String expressionResult) {
 
-        if(!mHistoryList.isEmpty() && newHistoryItem.equals(mHistoryList.get(0))){
+        if(!mHistoryList.isEmpty() && expression.equals(mHistoryList.get(0).getExpression())){
             return;
         }
 
-        mHistoryList.add(0, newHistoryItem);
+        mHistoryList.add(0, new HistoryItem(expression, expressionResult));
 
         if(mHistoryList.size() > NUM_HISTORY_SAVED){
             mHistoryList.remove(mHistoryList.size() - 1);
@@ -378,38 +437,30 @@ public class Calculator extends ActionBarActivity implements View.OnClickListene
 
     protected void showHistoryDialog() {
 
-        String[] historyArray = mHistoryList.toArray(new String[mHistoryList.size()]);
+        //String[] historyArray = mHistoryList.toArray(new String[mHistoryList.size()]);
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle(R.string.history_dialog_title);
-//               .setItems(historyArray, new DialogInterface.OnClickListener() {
-//                    @Override
-//                    public void onClick(DialogInterface dialogInterface, int position) {
-//                        displayView.setText("");
-//                        appendValue(mHistoryList.get(position));
-//
-//
-//                        //TODO: decide if I want to clear the field or just append the chosen result to it
-//                        //*if you decide to clear you must save last result in order to use it with next expression
-//                    }
-//               }
-//        );
+
+        //TODO: decide if I want to clear the field or just append the chosen result to it
 
         LayoutInflater inflater = getLayoutInflater();
-        View convertView = (View) inflater.inflate(R.layout.custom_list_dialog, null);
+        View convertView = (View) inflater.inflate(R.layout.dialog_history, null);
         builder.setView(convertView);
-        ListView listView = (ListView)convertView.findViewById(R.id.history_list_view);
+        ListView listView = (ListView)convertView.findViewById(R.id.list);
+        listView.setEmptyView(convertView.findViewById(R.id.empty));
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, historyArray);
+        HistoryAdapter adapter = new HistoryAdapter(this, mHistoryList);
         listView.setAdapter(adapter);
+
         final AlertDialog dialog = builder.create();
         dialog.setCanceledOnTouchOutside(true);
         dialog.show();
+
         listView.setOnItemClickListener( new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
                 displayView.setText("");
-                appendValue(mHistoryList.get(position));
+                appendValue(mHistoryList.get(position).getResult());
                 dialog.dismiss();
             }
         });
@@ -502,5 +553,25 @@ public class Calculator extends ActionBarActivity implements View.OnClickListene
     protected void onStart() {
         super.onStart();
         Log.d(TAG, "calculator - started (NOT restart!!)");
+    }
+
+    protected class HistoryItem {
+
+        private String mExpression;
+        private String mResult;
+
+        protected HistoryItem(String expression, String result){
+            mExpression = expression;
+            mResult = result;
+        }
+
+        public String getExpression(){
+            return mExpression;
+        }
+
+        public String getResult(){
+            return mResult;
+        }
+
     }
 }

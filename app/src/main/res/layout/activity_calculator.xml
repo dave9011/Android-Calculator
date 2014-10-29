@@ -5,9 +5,10 @@
               android:layout_height="match_parent"
               android:background="@color/calculator_background"
               android:orientation="vertical"
+              android:paddingBottom="15dp"
               android:paddingLeft="8dp"
               android:paddingRight="8dp"
-              android:paddingTop="25dp">
+              android:paddingTop="15dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -25,6 +26,7 @@
             android:layout_marginRight="10dp"
             android:layout_weight="1"
             android:background="@color/display_background"
+            android:editable="true"
             android:ellipsize="start"
             android:enabled="true"
             android:focusable="false"
@@ -49,18 +51,133 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/linearLayout3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
         <Button
+            android:id="@+id/exponent_2_button"
+            style="@style/FunctionButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:text="x\u00b2"
+            android:textStyle="bold"/>
+
+        <Button
+            android:id="@+id/exponent_3_button"
+            style="@style/FunctionButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:text="x\u00b3"
+            android:textStyle="bold"/>
+
+        <Button
+            android:id="@+id/exponent_n_button"
+            style="@style/FunctionButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:text="x\u207f"/>
+
+        <Button
+            android:id="@+id/log_button"
+            style="@style/FunctionButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:text="log"
+            android:textStyle="bold"/>
+
+        <Button
+            android:id="@+id/natural_log_button"
+            style="@style/FunctionButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:text="ln"
+            android:textStyle="bold"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/square_root_button"
+            style="@style/FunctionButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:text="sqrt"/>
+
+        <Button
             android:id="@+id/sin_button"
+            style="@style/FunctionButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:text="sin"/>
+
+        <Button
+            android:id="@+id/cos_button"
+            style="@style/FunctionButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:text="cos"
+            />
+
+        <Button
+            android:id="@+id/tan_button"
+            style="@style/FunctionButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:text="tan"
+            />
+
+        <Button
+            android:id="@+id/reciprocal_button
+            "
+            style="@style/FunctionButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:text="1/x"
+            android:textStyle="bold"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/keyboardButton"
             style="@style/OperatorButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:clickable="true"
-            android:text="sin"
+            android:text="key..d"
+            android:textStyle="bold"
             />
 
         <Button
@@ -112,14 +229,14 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/cos_button"
-            style="@style/OperatorButton"
+            android:id="@+id/mod_button"
+            style="@style/ButtonAltColor1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:clickable="true"
-            android:text="cos"
-            />
+            android:text="%"
+            android:textStyle="bold"/>
 
         <Button
             android:id="@+id/one_button"
@@ -163,13 +280,13 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/tan_button"
+            android:id="@+id/eulers_button"
             style="@style/OperatorButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:clickable="true"
-            android:text="tan"
+            android:text="e"
             />
 
         <Button
@@ -214,14 +331,13 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/eulers_button"
+            android:id="@+id/pi_button"
             style="@style/OperatorButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:clickable="true"
-            android:text="e"
-            />
+            android:text="pi"/>
 
         <Button
             android:id="@+id/seven_button"
@@ -265,13 +381,14 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/pi_button"
+            android:id="@+id/ans_button"
             style="@style/OperatorButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:clickable="true"
-            />
+            android:text="Ans"
+            android:textStyle="bold"/>
 
         <Button
             android:id="@+id/period_button"

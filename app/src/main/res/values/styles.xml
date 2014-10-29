@@ -72,7 +72,6 @@
 
     <style name="OperatorButton">
         <item name="android:background">@drawable/operator_btn_custom</item>
-        <!-- <item name="android:background">#00A885</item> -->
         <item name="android:layout_margin">2dp</item>
     </style>
 
@@ -83,6 +82,11 @@
 
     <style name="ButtonAltColor2">
         <item name="android:background">@drawable/btn_alt2_custom</item>
+        <item name="android:layout_margin">2dp</item>
+    </style>
+
+    <style name="FunctionButton">
+        <item name="android:background">@drawable/function_btn_custom</item>
         <item name="android:layout_margin">2dp</item>
     </style>
 
