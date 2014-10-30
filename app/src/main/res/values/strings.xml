@@ -8,5 +8,7 @@
     <string name="empty_history_label">There is no history between us yet!</string>
     <string name="action_clear_history">Clear History</string>
     <string name="history_cleared_message">History has been cleared!</string>
+    <string name="action_disable_sound_label">Disable sound</string>
+    <string name="action_enable_sound_label">Enable sound</string>
 
 </resources>

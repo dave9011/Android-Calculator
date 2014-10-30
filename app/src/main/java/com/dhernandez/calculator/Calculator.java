@@ -235,8 +235,8 @@ public class Calculator extends ActionBarActivity implements View.OnClickListene
     @Override
     public void onClick(View view) {
 
+        //TODO: add option to enable and disable click from within app
         if(CLICK_SOUND_ENABLED){
-            view.setSoundEffectsEnabled(true);
             view.playSoundEffect(SoundEffectConstants.CLICK);
         }
 
@@ -683,42 +683,6 @@ public class Calculator extends ActionBarActivity implements View.OnClickListene
                 return super.onOptionsItemSelected(item);
 
         }
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        Log.d(TAG, "calculator - PAUSED");
-    }
-
-    @Override
-    protected void onRestart() {
-        super.onRestart();
-        Log.d(TAG, "calculator - RESTARTED");
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        Log.d(TAG, "calculator - STOPPED");
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        Log.d(TAG, "calculator - DESTROYED");
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        Log.d(TAG, "calculator - RESUMED");
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        Log.d(TAG, "calculator - started (NOT restart!!)");
     }
 
     /**
