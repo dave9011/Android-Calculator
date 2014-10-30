@@ -261,19 +261,19 @@ public class Calculator extends ActionBarActivity implements View.OnClickListene
 
             case R.id.square_root_button: {
                 String text = displayView.getText().toString();
-                appendFunction(text, "sqrt");
+                appendValue("sqrt");
                 break;
             }
 
             case R.id.cube_root_button:{
                 String text = displayView.getText().toString();
-                appendFunction(text, "cbrt");
+                appendValue("cbrt");
                 break;
             }
 
             case R.id.natural_log_button: {
                 String text = displayView.getText().toString();
-                appendFunction(text, "ln");
+                appendValue("ln");
                 break;
             }
 
@@ -400,19 +400,19 @@ public class Calculator extends ActionBarActivity implements View.OnClickListene
 
             case R.id.sin_button: {
                 String text = displayView.getText().toString();
-                appendFunction(text, mSinText);
+                appendValue(mSinText);
                 break;
             }
 
             case R.id.cos_button: {
                 String text = displayView.getText().toString();
-                appendFunction(text, mCosText);
+                appendValue(mCosText);
                 break;
             }
 
             case R.id.tan_button: {
                 String text = displayView.getText().toString();
-                appendFunction(text, mTanText);
+                appendValue(mTanText);
                 break;
             }
 
@@ -435,7 +435,7 @@ public class Calculator extends ActionBarActivity implements View.OnClickListene
         if(SHIFT_DOWN){
             appendValue("log"+LOG_BASE_2_SYMBOL);
         } else {
-            appendFunction(text, "log");
+            appendValue("log");
         }
     }
 
@@ -497,14 +497,15 @@ public class Calculator extends ActionBarActivity implements View.OnClickListene
         evaluateExpression(text);
     }
 
-    private void appendFunction(String text, String function) {
-        if(text.isEmpty()){
-            displayView.setText( function + "(" );
-        }
-        else {
-            displayView.setText( function + "(" + text + ")" );
-        }
-    }
+    //TODO: look to see if there is a proper way to implement this, if not then remove it
+//    private void appendFunction(String text, String function) {
+//        if(text.isEmpty()){
+//            displayView.setText( function + "(" );
+//        }
+//        else {
+//            displayView.setText( function + "(" + text + ")" );
+//        }
+//    }
 
     //Possibly deprecated
     private void handleTrigFunction(String text, String trigFunction) {
