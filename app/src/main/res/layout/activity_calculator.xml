@@ -11,12 +11,12 @@
               android:paddingTop="15dp">
 
     <LinearLayout
+        android:id="@+id/displayLinearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="5dp"
         android:layout_marginTop="5dp"
-        android:orientation="horizontal"
-        >
+        android:orientation="horizontal">
 
         <EditText
             android:id="@+id/display"
@@ -49,6 +49,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/shift_button"
+            style="@style/ButtonAltColor2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Shift"
+            android:textStyle="normal"
+            />
 
         <Button
             android:id="@+id/exponent_2_button"
@@ -99,6 +109,15 @@
             android:text="ln"
             android:textStyle="bold"/>
 
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:orientation="horizontal">
+
         <Button
             android:id="@+id/keyboardButton"
             style="@style/OperatorButton"
@@ -109,14 +128,6 @@
             android:text="key"
             android:textStyle="bold"
             />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/linearLayout2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
 
         <Button
             android:id="@+id/square_root_button"
@@ -260,7 +271,7 @@
             android:layout_width="wrap_content"
             android:layout_height="fill_parent"
             android:layout_weight="1"
-            android:text="\u003c="/>
+            android:text="Del"/>
 
         <Button
             android:id="@+id/clear_button"

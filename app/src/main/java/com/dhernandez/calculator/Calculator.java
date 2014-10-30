@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.SoundEffectConstants;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
@@ -30,7 +31,6 @@ import java.util.ArrayList;
 
 
 //TODO: clean up drawable folders (unused apptheme resources)
-//TODO: add a clear history option
 
 public class Calculator extends ActionBarActivity implements View.OnClickListener {
 
@@ -38,9 +38,9 @@ public class Calculator extends ActionBarActivity implements View.OnClickListene
     public static final int NUM_HISTORY_SAVED = 10;
     public static final String PI_SYMBOL = "\u03C0";
     public static final String SQRT_SYMBOL = "\u221A";
-
     protected static final int DISPLAY_MAX_LENGTH = 40;
-
+    protected boolean SHIFT_DOWN =false;
+    protected boolean CLICK_SOUND_ENABLED = true;
     protected EditText displayView;
     protected Button b_clear;
     protected Button b_0;
@@ -80,12 +80,20 @@ public class Calculator extends ActionBarActivity implements View.OnClickListene
     protected Button b_ln;
     protected Button b_reciprocal;
 
+    protected Button b_shift;
 
     protected Editable displayText;
 
     protected ArrayList<HistoryItem> mHistoryList = new ArrayList<HistoryItem>();
 
     protected Parser mParser;
+
+    private String sinText = "sin";
+    private String cosText = "cos";
+    private String tanText = "tan";
+    private String arcsinText = Html.fromHtml(sinText + "<sup>-1</sup>").toString();
+    private String arccosText = Html.fromHtml(cosText + "cos<sup>-1</sup>").toString();
+    private String arctanText = Html.fromHtml(tanText + "tan<sup>-1</sup>").toString();
 
 
     @Override
@@ -135,6 +143,7 @@ public class Calculator extends ActionBarActivity implements View.OnClickListene
         b_right_parenthesis = (Button)findViewById(R.id.right_parenthesis_button);
 
         b_ans = (Button)findViewById(R.id.ans_button);
+        b_shift = (Button)findViewById(R.id.shift_button);
 
         displayView.setOnClickListener(this);
 
@@ -149,8 +158,7 @@ public class Calculator extends ActionBarActivity implements View.OnClickListene
         b_right_parenthesis.setOnClickListener(this);
 
         b_ans.setOnClickListener(this);
-
-
+        b_shift.setOnClickListener(this);
 
         setOperatorButtonVariables();
         setFunctionButtonVariables();
@@ -236,11 +244,21 @@ public class Calculator extends ActionBarActivity implements View.OnClickListene
     @Override
     public void onClick(View view) {
 
+        //TODO: add this option
+        if(CLICK_SOUND_ENABLED){
+            view.setSoundEffectsEnabled(true);
+            view.playSoundEffect(SoundEffectConstants.CLICK);
+        }
+
         int button_id = view.getId();
 
         switch(button_id) {
 
             //TODO: add cases for new buttons
+
+            case R.id.shift_button:
+                handleShift();
+                break;
 
             case R.id.square_root_button: {
                 String text = displayView.getText().toString();
@@ -383,19 +401,19 @@ public class Calculator extends ActionBarActivity implements View.OnClickListene
 
             case R.id.sin_button: {
                 String text = displayView.getText().toString();
-                appendFunction(text, "sin");
+                appendFunction(text, sinText);
                 break;
             }
 
             case R.id.cos_button: {
                 String text = displayView.getText().toString();
-                appendFunction(text, "cos");
+                appendFunction(text, cosText);
                 break;
             }
 
             case R.id.tan_button: {
                 String text = displayView.getText().toString();
-                appendFunction(text, "tan");
+                appendFunction(text, tanText);
                 break;
             }
 
@@ -410,6 +428,33 @@ public class Calculator extends ActionBarActivity implements View.OnClickListene
             default:
                 break;
 
+        }
+
+    }
+
+    protected void handleShift(){
+
+        SHIFT_DOWN = !(SHIFT_DOWN);
+
+        if(SHIFT_DOWN){
+            b_sin.setText(arcsinText);
+            b_sin.setBackgroundColor(getResources().getColor(R.color.button_on_shift_color));
+
+            b_cos.setText(arccosText);
+            b_cos.setBackgroundColor(getResources().getColor(R.color.button_on_shift_color));
+
+            b_tan.setText(arctanText);
+            b_tan.setBackgroundColor(getResources().getColor(R.color.button_on_shift_color));
+        }
+        else {
+            b_sin.setText(Html.fromHtml(sinText));
+            b_sin.setBackgroundColor(getResources().getColor(R.color.function_btn_default));
+
+            b_cos.setText(Html.fromHtml(cosText));
+            b_cos.setBackgroundColor(getResources().getColor(R.color.function_btn_default));
+
+            b_tan.setText(Html.fromHtml(tanText));
+            b_tan.setBackgroundColor(getResources().getColor(R.color.function_btn_default));
         }
 
     }
@@ -503,10 +548,8 @@ public class Calculator extends ActionBarActivity implements View.OnClickListene
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
-        //TODO: decide if I want to clear the field or just append the chosen result to it
-
         LayoutInflater inflater = getLayoutInflater();
-        View convertView = (View)inflater.inflate(R.layout.dialog_history, null);
+        View convertView = inflater.inflate(R.layout.dialog_history, null);
         builder.setView(convertView);
         ListView listView = (ListView)convertView.findViewById(R.id.list);
         listView.setEmptyView(convertView.findViewById(R.id.empty));
@@ -533,7 +576,6 @@ public class Calculator extends ActionBarActivity implements View.OnClickListene
      * mathematical expression parser.
      *
      * @param   expStr  expression to be evaluated
-     * @return          string containing the value of the expression
      */
     protected void evaluateExpression(String expStr){
 
@@ -557,17 +599,15 @@ public class Calculator extends ActionBarActivity implements View.OnClickListene
 
             Log.v(TAG, "The value of the expression is " + expr.getValue());
 
-            if (result != null) {
-                displayView.setText("");
-                appendValue(result);
-                addToHistory(originalExpression, result);
-            }
+            displayView.setText("");
+            appendValue(result);
+            addToHistory(originalExpression, result);
 
         }
         catch (ParserException e)
         {
             Log.e(TAG, e.getMessage());
-            if(usesPI == true){
+            if(usesPI){
                 //TODO : MAKE THIS AN ALERT DIALOG
                 Toast.makeText(this,
                         "Please include operator (+,-,/,*) between " + PI_SYMBOL + " and adjacent numbers or parentheses.",
