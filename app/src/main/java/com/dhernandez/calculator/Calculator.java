@@ -261,19 +261,19 @@ public class Calculator extends ActionBarActivity implements View.OnClickListene
 
             case R.id.square_root_button: {
                 String text = displayView.getText().toString();
-                appendValue("sqrt");
+                appendValue("sqrt"+"(");
                 break;
             }
 
             case R.id.cube_root_button:{
                 String text = displayView.getText().toString();
-                appendValue("cbrt");
+                appendValue("cbrt"+"(");
                 break;
             }
 
             case R.id.natural_log_button: {
                 String text = displayView.getText().toString();
-                appendValue("ln");
+                appendValue("ln"+"(");
                 break;
             }
 
@@ -400,19 +400,19 @@ public class Calculator extends ActionBarActivity implements View.OnClickListene
 
             case R.id.sin_button: {
                 String text = displayView.getText().toString();
-                appendValue(mSinText);
+                appendValue(mSinText+"(");
                 break;
             }
 
             case R.id.cos_button: {
                 String text = displayView.getText().toString();
-                appendValue(mCosText);
+                appendValue(mCosText+"(");
                 break;
             }
 
             case R.id.tan_button: {
                 String text = displayView.getText().toString();
-                appendValue(mTanText);
+                appendValue(mTanText+"(");
                 break;
             }
 
@@ -435,7 +435,7 @@ public class Calculator extends ActionBarActivity implements View.OnClickListene
         if(SHIFT_DOWN){
             appendValue("log"+LOG_BASE_2_SYMBOL);
         } else {
-            appendValue("log");
+            appendValue("log"+"(");
         }
     }
 
