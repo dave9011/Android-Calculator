@@ -1,7 +1,6 @@
 package com.dhernandez.calculator;
 
 import android.app.AlertDialog;
-import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.text.Editable;
@@ -14,7 +13,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.SoundEffectConstants;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
@@ -39,62 +37,59 @@ public class Calculator extends ActionBarActivity implements View.OnClickListene
     public static final String PI_SYMBOL = "\u03C0";
     public static final String SQRT_SYMBOL = "\u221A";
     protected static final int DISPLAY_MAX_LENGTH = 40;
-    protected boolean SHIFT_DOWN =false;
-    protected boolean CLICK_SOUND_ENABLED = true;
-    protected EditText displayView;
-    protected Button b_clear;
-    protected Button b_0;
-    protected Button b_1;
-    protected Button b_2;
-    protected Button b_3;
-    protected Button b_4;
-    protected Button b_5;
-    protected Button b_6;
-    protected Button b_7;
-    protected Button b_8;
-    protected Button b_9;
-    protected Button b_divide;
-    protected Button b_multiply;
-    protected Button b_add;
-    protected Button b_subtract;
-    protected Button b_period;
-    protected Button b_left_parenthesis;
-    protected Button b_right_parenthesis;
-    protected Button b_plusMinus;
-    protected Button b_equals;
-    protected Button b_sin;
-    protected Button b_cos;
-    protected Button b_tan;
-    protected Button b_eulers;
-    protected Button b_pi;
-    protected Button b_backspace;
 
-    protected Button b_ans;
-    protected Button b_keyboard;
-    protected Button b_mod;
-    protected Button b_sqrt;
-    protected Button b_exp_2;
-    protected Button b_exp_3;
-    protected Button b_exp_n;
-    protected Button b_log;
-    protected Button b_ln;
-    protected Button b_reciprocal;
+    private boolean SHIFT_DOWN =false;
+    private boolean CLICK_SOUND_ENABLED = true;
 
-    protected Button b_shift;
+    private EditText displayView;
+    private Button b_clear;
+    private Button b_0;
+    private Button b_1;
+    private Button b_2;
+    private Button b_3;
+    private Button b_4;
+    private Button b_5;
+    private Button b_6;
+    private Button b_7;
+    private Button b_8;
+    private Button b_9;
+    private Button b_divide;
+    private Button b_multiply;
+    private Button b_add;
+    private Button b_subtract;
+    private Button b_period;
+    private Button b_left_parenthesis;
+    private Button b_right_parenthesis;
+    private Button b_plusMinus;
+    private Button b_equals;
+    private Button b_sin;
+    private Button b_cos;
+    private Button b_tan;
+    private Button b_eulers;
+    private Button b_pi;
+    private Button b_backspace;
 
-    protected Editable displayText;
+    private Button b_ans;
+    private Button b_mod;
+    private Button b_sqrt;
+    private Button b_exp_2;
+    private Button b_exp_3;
+    private Button b_exp_n;
+    private Button b_log;
+    private Button b_ln;
+    private Button b_reciprocal;
 
-    protected ArrayList<HistoryItem> mHistoryList = new ArrayList<HistoryItem>();
+    private Button b_shift;
 
-    protected Parser mParser;
+    private Editable mDisplayText;
 
-    private String sinText = "sin";
-    private String cosText = "cos";
-    private String tanText = "tan";
-    private String arcsinText = Html.fromHtml(sinText + "<sup>-1</sup>").toString();
-    private String arccosText = Html.fromHtml(cosText + "cos<sup>-1</sup>").toString();
-    private String arctanText = Html.fromHtml(tanText + "tan<sup>-1</sup>").toString();
+    private ArrayList<HistoryItem> mHistoryList = new ArrayList<HistoryItem>();
 
+    private Parser mParser;
+
+    private String mSinText = "sin";
+    private String mCosText = "cos";
+    private String mTanText = "tan";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -117,20 +112,11 @@ public class Calculator extends ActionBarActivity implements View.OnClickListene
 
         displayView = (EditText)findViewById(R.id.display);
 
-        //TODO: remove this and member variable, and onClickListner switch case, also uncomment line below that disables display
-        b_keyboard = (Button)findViewById(R.id.keyboardButton);
-        b_keyboard.setOnClickListener(this);
-
-
-        //TODO:make display view NOT editable in xml
-        displayView.setFocusable(true);
+        displayView.setFocusable(false);
         displayView.setClickable(true);
 
-        //displayView.setFocusable(false);
-        //displayView.setClickable(true);
-
-        displayText = displayView.getText();
-        displayText.setFilters( new InputFilter[]{ new InputFilter.LengthFilter(DISPLAY_MAX_LENGTH)} );
+        mDisplayText = displayView.getText();
+        mDisplayText.setFilters(new InputFilter[]{new InputFilter.LengthFilter(DISPLAY_MAX_LENGTH)});
 
         b_clear = (Button)findViewById(R.id.clear_button);
         b_backspace = (Button)findViewById(R.id.backspace_button);
@@ -236,7 +222,7 @@ public class Calculator extends ActionBarActivity implements View.OnClickListene
         b_9.setOnClickListener(this);
     }
 
-    protected void setButtonSpecialSymbols(){
+    private void setButtonSpecialSymbols(){
         b_pi.setText(PI_SYMBOL);
         b_sqrt.setText(SQRT_SYMBOL);
     }
@@ -259,6 +245,13 @@ public class Calculator extends ActionBarActivity implements View.OnClickListene
             case R.id.shift_button:
                 handleShift();
                 break;
+
+            case R.id.reciprocal_button: {
+                String text = displayView.getText().toString();
+                text = "1/(" + text + ")";
+                evaluateExpression(text);
+                break;
+            }
 
             case R.id.square_root_button: {
                 String text = displayView.getText().toString();
@@ -293,12 +286,6 @@ public class Calculator extends ActionBarActivity implements View.OnClickListene
             //TODO: finish this
             case R.id.exponent_n_button:
                 displayView.setText(Html.fromHtml("x<sup>n</sup>"));
-                break;
-
-            //TODO: remove this
-            case R.id.keyboardButton:
-                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-                imm.toggleSoftInput(InputMethodManager.SHOW_FORCED,0);
                 break;
 
             case R.id.display:
@@ -401,19 +388,19 @@ public class Calculator extends ActionBarActivity implements View.OnClickListene
 
             case R.id.sin_button: {
                 String text = displayView.getText().toString();
-                appendFunction(text, sinText);
+                appendFunction(text, mSinText);
                 break;
             }
 
             case R.id.cos_button: {
                 String text = displayView.getText().toString();
-                appendFunction(text, cosText);
+                appendFunction(text, mCosText);
                 break;
             }
 
             case R.id.tan_button: {
                 String text = displayView.getText().toString();
-                appendFunction(text, tanText);
+                appendFunction(text, mTanText);
                 break;
             }
 
@@ -432,29 +419,34 @@ public class Calculator extends ActionBarActivity implements View.OnClickListene
 
     }
 
-    protected void handleShift(){
+    private void handleShift(){
 
         SHIFT_DOWN = !(SHIFT_DOWN);
 
         if(SHIFT_DOWN){
-            b_sin.setText(arcsinText);
+            b_sin.setText(Html.fromHtml(mSinText + "<sup>-1</sup>"));
             b_sin.setBackgroundColor(getResources().getColor(R.color.button_on_shift_color));
 
-            b_cos.setText(arccosText);
+            b_cos.setText(Html.fromHtml(mCosText + "<sup>-1</sup>"));
             b_cos.setBackgroundColor(getResources().getColor(R.color.button_on_shift_color));
 
-            b_tan.setText(arctanText);
+            b_tan.setText(Html.fromHtml(mTanText + "<sup>-1</sup>"));
             b_tan.setBackgroundColor(getResources().getColor(R.color.button_on_shift_color));
+
+            b_shift.setBackgroundColor(getResources().getColor(R.color.button_on_shift_color));
+
         }
         else {
-            b_sin.setText(Html.fromHtml(sinText));
+            b_sin.setText(Html.fromHtml(mSinText));
             b_sin.setBackgroundColor(getResources().getColor(R.color.function_btn_default));
 
-            b_cos.setText(Html.fromHtml(cosText));
+            b_cos.setText(Html.fromHtml(mCosText));
             b_cos.setBackgroundColor(getResources().getColor(R.color.function_btn_default));
 
-            b_tan.setText(Html.fromHtml(tanText));
+            b_tan.setText(Html.fromHtml(mTanText));
             b_tan.setBackgroundColor(getResources().getColor(R.color.function_btn_default));
+
+            b_shift.setBackgroundColor(getResources().getColor(R.color.button_altColor_2_default));
         }
 
     }
@@ -542,7 +534,7 @@ public class Calculator extends ActionBarActivity implements View.OnClickListene
      * Displays the expression and result of each HistoryItem object in mHistoryList using the
      * custom adapter, HistoryAdapter.
      */
-    protected void showHistoryDialog() {
+    private void showHistoryDialog() {
 
         //String[] historyArray = mHistoryList.toArray(new String[mHistoryList.size()]);
 
@@ -577,7 +569,7 @@ public class Calculator extends ActionBarActivity implements View.OnClickListene
      *
      * @param   expStr  expression to be evaluated
      */
-    protected void evaluateExpression(String expStr){
+    private void evaluateExpression(String expStr){
 
         String originalExpression = expStr;
 

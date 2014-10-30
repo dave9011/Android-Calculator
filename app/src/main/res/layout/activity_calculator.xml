@@ -26,7 +26,7 @@
             android:layout_marginRight="2dp"
             android:layout_weight="1"
             android:background="@color/display_background"
-            android:editable="true"
+            android:editable="false"
             android:ellipsize="start"
             android:enabled="true"
             android:focusable="false"
@@ -119,15 +119,15 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/keyboardButton"
-            style="@style/OperatorButton"
+            android:id="@+id/log_base2_button"
+            style="@style/FunctionButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:clickable="true"
-            android:text="key"
-            android:textStyle="bold"
-            />
+            android:singleLine="false"
+            android:text="log2"
+            android:textStyle="bold"/>
 
         <Button
             android:id="@+id/square_root_button"
@@ -298,12 +298,12 @@
             android:layout_weight="1"
             android:text="4"/>
 
-        <Button
-            android:id="@+id/five_button"
+        <Button  android:id="@+id/five_button"
             style="@style/NumberButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:hapticFeedbackEnabled="true"
             android:text="5"/>
 
         <Button

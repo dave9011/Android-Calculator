@@ -8,6 +8,7 @@
       <!--  <item name="android:minHeight">48dip</item>
         <item name="android:minWidth">64dip</item>    -->
         <item name="android:textColor">@android:color/white</item>
+        <item name="android:hapticFeedbackEnabled">true</item>
     </style>
 
     <style name="ImageButtonAppTheme" parent="android:Widget.Holo.Light.ImageButton">

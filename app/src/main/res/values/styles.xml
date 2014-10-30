@@ -27,6 +27,7 @@
         <item name="android:minWidth">64dip</item> -->
         <item name="android:textColor">@android:color/white</item>
         <item name="android:textStyle">bold</item>
+        <item name="android:hapticFeedbackEnabled">true</item>
     </style>
 
     <style name="ImageButtonAppTheme" parent="android:Widget.ImageButton">
@@ -88,7 +89,7 @@
     <style name="FunctionButton">
         <item name="android:background">@drawable/function_btn_custom</item>
         <item name="android:layout_margin">2dp</item>
-        <item name="android:textSize">15sp</item>
+        <item name="android:textSize">16sp</item>
     </style>
 
 </resources>
