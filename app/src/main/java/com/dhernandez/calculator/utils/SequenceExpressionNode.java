@@ -34,6 +34,9 @@ import java.util.ArrayList;
  */
 public abstract class SequenceExpressionNode implements ExpressionNode
 {
+    public static final int MULT_OP = 0;
+    public static final int DIV_OP = 1;
+    public static final int MOD_OP = 2;
   /** the list of terms in the sequence */
   protected ArrayList<Term> terms;
 
@@ -63,36 +66,63 @@ public abstract class SequenceExpressionNode implements ExpressionNode
    * Add another term to the sequence
    * @param node
    *          the term to be added
-   * @param positive
+   * @param id
    *          a boolean flag
    */
-  public void add(ExpressionNode node, boolean positive)
+  public void add(ExpressionNode node, int id)
   {
-    this.terms.add(new Term(positive, node));
+    this.terms.add(new Term(id, node));
   }
+
+    public void add(ExpressionNode node, boolean positive)
+    {
+        this.terms.add(new Term(positive, node));
+    }
 
   /**
    * An inner class that defines a pair containing an ExpressionNode and a
    * boolean flag.
    */
-  public class Term
+  public class Term    //<------------- CHANGED BY DAVE!!!!
   {
     /** the boolean flag */
-    public boolean positive;
+    public int id=0;
+      public boolean positive;
     /** the expression node */
     public ExpressionNode expression;
 
+      public boolean isMultDivMod = false;
+
     /**
      * Construct the Term object with some values.
-     * @param positive the boolean flag
+     * @param id the boolean flag
      * @param expression the expression node
      */
-    public Term(boolean positive, ExpressionNode expression)
+    public Term(int id, ExpressionNode expression)
     {
-      super();
-      this.positive = positive;
-      this.expression = expression;
+        super();
+
+        if(id == MULT_OP){
+            this.id = MULT_OP;
+        }
+        else if(id == DIV_OP){
+            this.id = DIV_OP;
+        }
+        else {
+            this.id = MOD_OP;
+        }
+        isMultDivMod = true;
+
+        this.expression = expression;
     }
+
+      public Term(boolean positive, ExpressionNode expression)
+      {
+          super();
+          this.positive = positive;
+          this.expression = expression;
+      }
+
   }
 
 }

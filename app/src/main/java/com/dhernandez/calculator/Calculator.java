@@ -246,6 +246,10 @@ public class Calculator extends ActionBarActivity implements View.OnClickListene
                 handleShift();
                 break;
 
+            case R.id.mod_button:
+                appendValue(b_mod.getText());
+                break;
+
             case R.id.reciprocal_button: {
                 String text = displayView.getText().toString();
                 text = "1/(" + text + ")";
@@ -589,7 +593,7 @@ public class Calculator extends ActionBarActivity implements View.OnClickListene
 
             String result = expr.getValue()+"";
 
-            Log.v(TAG, "The value of the expression is " + expr.getValue());
+            Log.v(TAG, "The value of " + originalExpression + " is " + expr.getValue());
 
             displayView.setText("");
             appendValue(result);

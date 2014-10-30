@@ -68,10 +68,15 @@ public class MultiplicationExpressionNode extends SequenceExpressionNode
     double prod = 1.0;
     for (Term t : terms)
     {
-      if (t.positive)
-        prod *= t.expression.getValue();
-      else
-        prod /= t.expression.getValue();
+      if (t.id == SequenceExpressionNode.MULT_OP) {
+          prod *= t.expression.getValue();
+      }
+      else if (t.id == SequenceExpressionNode.DIV_OP) {
+          prod /= t.expression.getValue();
+      }
+      else {
+          prod %= t.expression.getValue();
+      }
     }
     return prod;
   }

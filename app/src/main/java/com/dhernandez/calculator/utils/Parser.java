@@ -183,13 +183,28 @@ public class Parser
       else
         prod = new MultiplicationExpressionNode(expression, true);
 
+        /* Changed by Dave
       // reduce the input and recursively call sum_op
       boolean positive = lookahead.sequence.equals("*");
       nextToken();
       ExpressionNode f = signedFactor();
       prod.add(f, positive);
+      */
 
-      return termOp(prod);
+        int op_id;
+        if(lookahead.sequence.equals("*")){
+            op_id = SequenceExpressionNode.MULT_OP;
+        } else if(lookahead.sequence.equals("/")) {
+            op_id = SequenceExpressionNode.DIV_OP;
+        } else {
+            op_id = SequenceExpressionNode.MOD_OP;
+        }
+        nextToken();
+        ExpressionNode f = signedFactor();
+        prod.add(f, op_id);
+
+        return termOp(prod);
+
     }
 
     // term_op -> EPSILON
