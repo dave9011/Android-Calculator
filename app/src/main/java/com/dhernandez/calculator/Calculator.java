@@ -30,8 +30,6 @@ import com.dhernandez.calculator.utils.SetVariable;
 import java.util.ArrayList;
 
 
-//TODO: clean up drawable folders (unused apptheme resources)
-
 public class Calculator extends ActionBarActivity implements View.OnClickListener {
 
     public static final String TAG = Calculator.class.getSimpleName();
@@ -237,7 +235,6 @@ public class Calculator extends ActionBarActivity implements View.OnClickListene
     @Override
     public void onClick(View view) {
 
-        //TODO: add this option
         if(CLICK_SOUND_ENABLED){
             view.setSoundEffectsEnabled(true);
             view.playSoundEffect(SoundEffectConstants.CLICK);
@@ -246,8 +243,6 @@ public class Calculator extends ActionBarActivity implements View.OnClickListene
         int button_id = view.getId();
 
         switch(button_id) {
-
-            //TODO: add cases for new buttons
 
             case R.id.shift_button:
                 changeDisplayOnShift();
@@ -449,9 +444,6 @@ public class Calculator extends ActionBarActivity implements View.OnClickListene
 
         SHIFT_DOWN = !(SHIFT_DOWN);
 
-        /* TODO: change this method to set the background, NOT THE BACKGRoUND COLOR, using the drawables
-                so that the buttons display their pressed states */
-
         if(SHIFT_DOWN){
 
             b_sin.setText(Html.fromHtml(mSinText + "<sup>-1</sup>"));
@@ -514,7 +506,7 @@ public class Calculator extends ActionBarActivity implements View.OnClickListene
         }
     }
 
-    //TODO: delete this, no longer necessary with appendFunction
+    //Possibly deprecated
     private void handleTrigFunction(String text, String trigFunction) {
         if (text.isEmpty()) {
             text = trigFunction + "(";
@@ -655,7 +647,7 @@ public class Calculator extends ActionBarActivity implements View.OnClickListene
             if(usesPI){
                 //TODO : MAKE THIS AN ALERT DIALOG
                 Toast.makeText(this,
-                        "Please include operator (+,-,/,*) between " + PI_SYMBOL + " and adjacent numbers or parentheses.",
+                        "Please include operator an between " + PI_SYMBOL + " and adjacent numbers or parentheses.",
                         Toast.LENGTH_SHORT).show();
             } else {
                 Toast.makeText(this, "Unable to evaluate that expression!", Toast.LENGTH_SHORT).show();
