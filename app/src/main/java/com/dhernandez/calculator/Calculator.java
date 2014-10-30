@@ -1,6 +1,8 @@
 package com.dhernandez.calculator;
 
+import android.annotation.TargetApi;
 import android.app.AlertDialog;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.text.Editable;
@@ -33,10 +35,11 @@ import java.util.ArrayList;
 public class Calculator extends ActionBarActivity implements View.OnClickListener {
 
     public static final String TAG = Calculator.class.getSimpleName();
-    public static final int NUM_HISTORY_SAVED = 10;
-    public static final String PI_SYMBOL = "\u03C0";
-    public static final String SQRT_SYMBOL = "\u221A";
-    protected static final int DISPLAY_MAX_LENGTH = 40;
+    private static final int DISPLAY_MAX_LENGTH = 40;
+    public final int NUM_HISTORY_SAVED = 10;
+    private final String PI_SYMBOL = "\u03C0";
+    private final String SQRT_SYMBOL = "\u221A";
+    private final String LOG_BASE_2_SYMBOL = "\u2082";
 
     private boolean SHIFT_DOWN =false;
     private boolean CLICK_SOUND_ENABLED = true;
@@ -65,11 +68,10 @@ public class Calculator extends ActionBarActivity implements View.OnClickListene
     private Button b_sin;
     private Button b_cos;
     private Button b_tan;
-    private Button b_eulers;
+    private Button b_scientific_notation;
     private Button b_pi;
     private Button b_backspace;
 
-    private Button b_ans;
     private Button b_mod;
     private Button b_sqrt;
     private Button b_exp_2;
@@ -121,14 +123,13 @@ public class Calculator extends ActionBarActivity implements View.OnClickListene
         b_clear = (Button)findViewById(R.id.clear_button);
         b_backspace = (Button)findViewById(R.id.backspace_button);
 
-        b_eulers = (Button)findViewById(R.id.eulers_button);
+        b_scientific_notation = (Button)findViewById(R.id.scientific_notation_button);
         b_pi = (Button)findViewById(R.id.pi_button);
 
         b_period = (Button)findViewById(R.id.period_button);
         b_left_parenthesis = (Button)findViewById(R.id.left_parenthesis_button);
         b_right_parenthesis = (Button)findViewById(R.id.right_parenthesis_button);
 
-        b_ans = (Button)findViewById(R.id.ans_button);
         b_shift = (Button)findViewById(R.id.shift_button);
 
         displayView.setOnClickListener(this);
@@ -136,14 +137,13 @@ public class Calculator extends ActionBarActivity implements View.OnClickListene
         b_clear.setOnClickListener(this);
         b_backspace.setOnClickListener(this);
 
-        b_eulers.setOnClickListener(this);
+        b_scientific_notation.setOnClickListener(this);
         b_pi.setOnClickListener(this);
 
         b_period.setOnClickListener(this);
         b_left_parenthesis.setOnClickListener(this);
         b_right_parenthesis.setOnClickListener(this);
 
-        b_ans.setOnClickListener(this);
         b_shift.setOnClickListener(this);
 
         setOperatorButtonVariables();
@@ -243,7 +243,7 @@ public class Calculator extends ActionBarActivity implements View.OnClickListene
             //TODO: add cases for new buttons
 
             case R.id.shift_button:
-                handleShift();
+                changeDisplayOnShift();
                 break;
 
             case R.id.mod_button:
@@ -271,7 +271,7 @@ public class Calculator extends ActionBarActivity implements View.OnClickListene
 
             case R.id.log_button: {
                 String text = displayView.getText().toString();
-                appendFunction(text, "log");
+                handleBasedLog(text);
                 break;
             }
 
@@ -288,9 +288,13 @@ public class Calculator extends ActionBarActivity implements View.OnClickListene
             }
 
             //TODO: finish this
-            case R.id.exponent_n_button:
-                displayView.setText(Html.fromHtml("x<sup>n</sup>"));
+            case R.id.exponent_n_button: {
+                //String x = displayView.getText().toString();
+                //sidePanel.setText(b_exp_n.getText());
+                appendValue("^");
+                //displayView.setText(Html.fromHtml("x<sup>n</sup>"));
                 break;
+            }
 
             case R.id.display:
                 showHistoryDialog();
@@ -308,8 +312,8 @@ public class Calculator extends ActionBarActivity implements View.OnClickListene
                 }
                 break;
 
-            case R.id.eulers_button:
-                appendValue(b_eulers.getText());
+            case R.id.scientific_notation_button:
+                appendValue("E");
                 break;
 
             case R.id.pi_button:
@@ -423,34 +427,66 @@ public class Calculator extends ActionBarActivity implements View.OnClickListene
 
     }
 
-    private void handleShift(){
+    private void handleBasedLog(String text) {
+        if(SHIFT_DOWN){
+            appendValue("log"+LOG_BASE_2_SYMBOL);
+        } else {
+            appendFunction(text, "log");
+        }
+    }
+
+    @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
+    private void changeDisplayOnShift(){
 
         SHIFT_DOWN = !(SHIFT_DOWN);
 
+        /* TODO: change this method to set the background, NOT THE BACKGRoUND COLOR, using the drawables
+                so that the buttons display their pressed states */
+
         if(SHIFT_DOWN){
+
             b_sin.setText(Html.fromHtml(mSinText + "<sup>-1</sup>"));
-            b_sin.setBackgroundColor(getResources().getColor(R.color.button_on_shift_color));
-
             b_cos.setText(Html.fromHtml(mCosText + "<sup>-1</sup>"));
-            b_cos.setBackgroundColor(getResources().getColor(R.color.button_on_shift_color));
-
             b_tan.setText(Html.fromHtml(mTanText + "<sup>-1</sup>"));
-            b_tan.setBackgroundColor(getResources().getColor(R.color.button_on_shift_color));
+            b_log.setText("log"+LOG_BASE_2_SYMBOL);
 
-            b_shift.setBackgroundColor(getResources().getColor(R.color.button_on_shift_color));
+            int sdk = android.os.Build.VERSION.SDK_INT;
+            if(sdk < android.os.Build.VERSION_CODES.JELLY_BEAN) {
+                b_sin.setBackgroundDrawable(getResources().getDrawable(R.drawable.shifted_btn_custom));
+                b_cos.setBackgroundDrawable(getResources().getDrawable(R.drawable.shifted_btn_custom));
+                b_tan.setBackgroundDrawable(getResources().getDrawable(R.drawable.shifted_btn_custom));
+                b_log.setBackgroundDrawable(getResources().getDrawable(R.drawable.shifted_btn_custom));
+            } else {
+                b_sin.setBackground(getResources().getDrawable(R.drawable.shifted_btn_custom));
+                b_cos.setBackground(getResources().getDrawable(R.drawable.shifted_btn_custom));
+                b_tan.setBackground(getResources().getDrawable(R.drawable.shifted_btn_custom));
+                b_log.setBackground(getResources().getDrawable(R.drawable.shifted_btn_custom));
+            }
+
+            b_shift.setBackgroundColor(getResources().getColor(R.color.button_altColor_2_pressed));
 
         }
         else {
             b_sin.setText(Html.fromHtml(mSinText));
-            b_sin.setBackgroundColor(getResources().getColor(R.color.function_btn_default));
-
             b_cos.setText(Html.fromHtml(mCosText));
-            b_cos.setBackgroundColor(getResources().getColor(R.color.function_btn_default));
-
             b_tan.setText(Html.fromHtml(mTanText));
-            b_tan.setBackgroundColor(getResources().getColor(R.color.function_btn_default));
+            b_log.setText("log");
 
-            b_shift.setBackgroundColor(getResources().getColor(R.color.button_altColor_2_default));
+            int sdk = android.os.Build.VERSION.SDK_INT;
+            if(sdk < android.os.Build.VERSION_CODES.JELLY_BEAN) {
+                b_sin.setBackgroundDrawable(getResources().getDrawable(R.drawable.function_btn_custom));
+                b_cos.setBackgroundDrawable(getResources().getDrawable(R.drawable.function_btn_custom));
+                b_tan.setBackgroundDrawable(getResources().getDrawable(R.drawable.function_btn_custom));
+                b_log.setBackgroundDrawable(getResources().getDrawable(R.drawable.function_btn_custom));
+                b_shift.setBackgroundDrawable(getResources().getDrawable(R.drawable.btn_alt2_custom));
+            } else {
+                b_sin.setBackground(getResources().getDrawable(R.drawable.function_btn_custom));
+                b_cos.setBackground(getResources().getDrawable(R.drawable.function_btn_custom));
+                b_tan.setBackground(getResources().getDrawable(R.drawable.function_btn_custom));
+                b_log.setBackground(getResources().getDrawable(R.drawable.function_btn_custom));
+                b_shift.setBackground(getResources().getDrawable(R.drawable.btn_alt2_custom));
+            }
+
         }
 
     }
@@ -585,6 +621,9 @@ public class Calculator extends ActionBarActivity implements View.OnClickListene
             if(expStr.contains(PI_SYMBOL)){
                 expStr = expStr.replaceAll(PI_SYMBOL, "pi");
                 usesPI = true;
+            }
+            if(expStr.contains(LOG_BASE_2_SYMBOL)){
+                expStr = expStr.replaceAll(LOG_BASE_2_SYMBOL, "2 ");
             }
 
             ExpressionNode expr = mParser.parse(expStr);

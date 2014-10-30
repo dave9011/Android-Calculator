@@ -20,8 +20,9 @@
     <color name="button_altColor_1_default">#00A885</color>
     <color name="button_altColor_1_pressed">#007e63</color>
     <color name="button_altColor_2_default">#FBA026</color>
-    <color name="button_altColor_2_pressed">#ffc9801e</color>
+    <color name="button_altColor_2_pressed">#ffe77e03</color>
 
-    <color name="button_on_shift_color">#2969B0</color>
+    <color name="button_on_shift_color_default">#2969B0</color>
+    <color name="button_on_shift_color_pressed">#ff1e4d81</color>
 
 </resources>

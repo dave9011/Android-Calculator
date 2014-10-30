@@ -22,7 +22,6 @@
             android:id="@+id/display"
             android:layout_width="0dp"
             android:layout_height="fill_parent"
-            android:layout_marginLeft="2dp"
             android:layout_marginRight="2dp"
             android:layout_weight="1"
             android:background="@color/display_background"
@@ -48,6 +47,7 @@
         android:id="@+id/linearLayout3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:orientation="horizontal">
 
         <Button
@@ -59,35 +59,6 @@
             android:text="Shift"
             android:textStyle="normal"
             />
-
-        <Button
-            android:id="@+id/exponent_2_button"
-            style="@style/FunctionButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:clickable="true"
-            android:text="x\u00b2"
-            android:textStyle="bold"/>
-
-        <Button
-            android:id="@+id/exponent_3_button"
-            style="@style/FunctionButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:clickable="true"
-            android:text="x\u00b3"
-            android:textStyle="bold"/>
-
-        <Button
-            android:id="@+id/exponent_n_button"
-            style="@style/FunctionButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:clickable="true"
-            android:text="x\u207f"/>
 
         <Button
             android:id="@+id/log_button"
@@ -109,26 +80,6 @@
             android:text="ln"
             android:textStyle="bold"/>
 
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/linearLayout2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/log_base2_button"
-            style="@style/FunctionButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:clickable="true"
-            android:singleLine="false"
-            android:text="log2"
-            android:textStyle="bold"/>
-
         <Button
             android:id="@+id/square_root_button"
             style="@style/FunctionButton"
@@ -137,6 +88,38 @@
             android:layout_weight="1"
             android:clickable="true"
             android:text="sqrt"/>
+
+        <Button
+            android:id="@+id/cube_root_button"
+            style="@style/FunctionButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:singleLine="false"
+            android:text="cbrt"
+            android:textStyle="bold"/>
+
+        <Button
+            android:id="@+id/reciprocal_button
+            "
+            style="@style/FunctionButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:text="1/x"
+            android:textStyle="bold"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:orientation="horizontal"
+        >
 
         <Button
             android:id="@+id/sin_button"
@@ -168,15 +151,33 @@
             />
 
         <Button
-            android:id="@+id/reciprocal_button
-            "
+            android:id="@+id/exponent_2_button"
             style="@style/FunctionButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:clickable="true"
-            android:text="1/x"
+            android:text="x\u00b2"
             android:textStyle="bold"/>
+
+        <Button
+            android:id="@+id/exponent_3_button"
+            style="@style/FunctionButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:text="x\u00b3"
+            android:textStyle="bold"/>
+
+        <Button
+            android:id="@+id/exponent_n_button"
+            style="@style/FunctionButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:text="x\u207f"/>
 
     </LinearLayout>
 
@@ -204,16 +205,6 @@
             android:clickable="true"
             android:text=")"
             android:textStyle="bold"/>
-
-        <Button
-            android:id="@+id/eulers_button"
-            style="@style/OperatorButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:clickable="true"
-            android:text="e"
-            />
 
         <Button
             android:id="@+id/pi_button"
@@ -420,14 +411,14 @@
             android:textStyle="bold"/>
 
         <Button
-            android:id="@+id/ans_button"
+            android:id="@+id/scientific_notation_button"
             style="@style/OperatorButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:clickable="true"
-            android:text="Ans"
-            android:textStyle="bold"/>
+            android:text="EXP"
+            />
 
         <Button
             android:id="@+id/equals_button"
