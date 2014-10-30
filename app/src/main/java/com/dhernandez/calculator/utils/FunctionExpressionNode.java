@@ -47,6 +47,10 @@ public class FunctionExpressionNode implements ExpressionNode
 
   /** function id for the sqrt function */
   public static final int SQRT = 7;
+
+    /** ADDED BY DAVE: function id for the cbrt function */
+    public static final int CBRT = 12;
+
   /** function id for the exp function */
   public static final int EXP = 8;
 
@@ -105,6 +109,8 @@ public class FunctionExpressionNode implements ExpressionNode
 
     if (str.equals("sqrt"))
       return FunctionExpressionNode.SQRT;
+    if(str.equals("cbrt"))
+      return FunctionExpressionNode.CBRT;
     if (str.equals("exp"))
       return FunctionExpressionNode.EXP;
 
@@ -128,7 +134,8 @@ public class FunctionExpressionNode implements ExpressionNode
    */
   public static String getAllFunctions()
   {
-    return "sin|cos|tan|asin|acos|atan|sqrt|exp|ln|log|log2";
+      //Altered by Dave (added 'cbrt').
+    return "sin|cos|tan|asin|acos|atan|sqrt|cbrt|exp|ln|log|log2";
   }
 
   /**
@@ -163,6 +170,11 @@ public class FunctionExpressionNode implements ExpressionNode
         return Math.atan(argument.getValue());
       case SQRT:
         return Math.sqrt(argument.getValue());
+
+      //Added by Dave
+        case CBRT:
+          return Math.cbrt(argument.getValue());
+
       case EXP:
         return Math.exp(argument.getValue());
       case LN:

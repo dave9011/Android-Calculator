@@ -1,8 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="fill_parent"
+              android:layout_height="fill_parent"
+              android:background="@color/calculator_background"
+              android:orientation="vertical"
+    >
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" >
+
+<LinearLayout
               android:layout_width="match_parent"
-              android:layout_height="match_parent"
+              android:layout_height="wrap_content"
               android:background="@color/calculator_background"
               android:orientation="vertical"
               android:paddingBottom="15dp"
@@ -14,7 +25,6 @@
         android:id="@+id/displayLinearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="5dp"
         android:layout_marginTop="5dp"
         android:orientation="horizontal">
 
@@ -38,7 +48,8 @@
             android:scrollHorizontally="true"
             android:singleLine="true"
             android:textColor="@android:color/black"
-            android:textSize="35sp"/>
+            android:textSize="35sp"
+            />
 
 
     </LinearLayout>
@@ -47,7 +58,7 @@
         android:id="@+id/linearLayout3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="15dp"
         android:orientation="horizontal">
 
         <Button
@@ -56,9 +67,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:minHeight="1dp"
+            android:paddingBottom="8dp"
+            android:paddingTop="8dp"
             android:text="Shift"
-            android:textStyle="normal"
-            />
+            android:textSize="22sp"
+            android:textStyle="normal"/>
 
         <Button
             android:id="@+id/log_button"
@@ -67,8 +81,12 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:clickable="true"
+            android:minHeight="1dp"
+            android:paddingBottom="8dp"
+            android:paddingTop="8dp"
             android:text="log"
-            android:textStyle="bold"/>
+            android:textSize="22sp"
+            android:textStyle="normal"/>
 
         <Button
             android:id="@+id/natural_log_button"
@@ -77,8 +95,12 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:clickable="true"
+            android:minHeight="1dp"
+            android:paddingBottom="8dp"
+            android:paddingTop="8dp"
             android:text="ln"
-            android:textStyle="bold"/>
+            android:textSize="22sp"
+            android:textStyle="normal"/>
 
         <Button
             android:id="@+id/square_root_button"
@@ -87,7 +109,12 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:clickable="true"
-            android:text="sqrt"/>
+            android:minHeight="1dp"
+            android:paddingBottom="8dp"
+            android:paddingTop="8dp"
+            android:text="sqrt"
+            android:textSize="22sp"
+            android:textStyle="normal"/>
 
         <Button
             android:id="@+id/cube_root_button"
@@ -96,20 +123,27 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:clickable="true"
+            android:minHeight="1dp"
+            android:paddingBottom="8dp"
+            android:paddingTop="8dp"
             android:singleLine="false"
             android:text="cbrt"
-            android:textStyle="bold"/>
+            android:textSize="22sp"
+            android:textStyle="normal"/>
 
         <Button
-            android:id="@+id/reciprocal_button
-            "
+            android:id="@+id/reciprocal_button"
             style="@style/FunctionButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:clickable="true"
+            android:minHeight="1dp"
+            android:paddingBottom="8dp"
+            android:paddingTop="8dp"
             android:text="1/x"
-            android:textStyle="bold"/>
+            android:textSize="22sp"
+            android:textStyle="normal"/>
 
     </LinearLayout>
 
@@ -117,7 +151,6 @@
         android:id="@+id/linearLayout2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
         android:orientation="horizontal"
         >
 
@@ -128,7 +161,12 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:clickable="true"
-            android:text="sin"/>
+            android:minHeight="1dp"
+            android:paddingBottom="8dp"
+            android:paddingTop="8dp"
+            android:text="sin"
+            android:textSize="22sp"
+            android:textStyle="normal"/>
 
         <Button
             android:id="@+id/cos_button"
@@ -137,8 +175,12 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:clickable="true"
+            android:minHeight="1dp"
+            android:paddingBottom="8dp"
+            android:paddingTop="8dp"
             android:text="cos"
-            />
+            android:textSize="22sp"
+            android:textStyle="normal"/>
 
         <Button
             android:id="@+id/tan_button"
@@ -147,8 +189,12 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:clickable="true"
+            android:minHeight="1dp"
+            android:paddingBottom="8dp"
+            android:paddingTop="8dp"
             android:text="tan"
-            />
+            android:textSize="22sp"
+            android:textStyle="normal"/>
 
         <Button
             android:id="@+id/exponent_2_button"
@@ -157,18 +203,27 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:clickable="true"
+            android:minHeight="1dp"
+            android:paddingBottom="8dp"
+            android:paddingTop="8dp"
             android:text="x\u00b2"
-            android:textStyle="bold"/>
+            android:textSize="22sp"
+            android:textStyle="normal"/>
 
         <Button
             android:id="@+id/exponent_3_button"
             style="@style/FunctionButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
             android:layout_weight="1"
             android:clickable="true"
+            android:minHeight="1dp"
+            android:paddingBottom="8dp"
+            android:paddingTop="8dp"
             android:text="x\u00b3"
-            android:textStyle="bold"/>
+            android:textSize="22sp"
+            android:textStyle="normal"/>
 
         <Button
             android:id="@+id/exponent_n_button"
@@ -177,53 +232,77 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:clickable="true"
-            android:text="x\u207f"/>
+            android:minHeight="1dp"
+            android:paddingBottom="8dp"
+            android:paddingTop="8dp"
+            android:text="x\u207f"
+            android:textSize="22sp"
+            android:textStyle="normal"/>
 
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/linearLayout4"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="15dp"
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/left_parenthesis_button"
-            style="@style/ButtonAltColor1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:clickable="true"
-            android:text="("
-            android:textStyle="bold"/>
-
-        <Button
-            android:id="@+id/right_parenthesis_button"
-            style="@style/ButtonAltColor1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:clickable="true"
-            android:text=")"
-            android:textStyle="bold"/>
-
-        <Button
             android:id="@+id/pi_button"
-            style="@style/OperatorButton"
+            style="@style/FunctionButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:clickable="true"
-            android:text="pi"/>
+            android:minHeight="1dp"
+            android:paddingBottom="8dp"
+            android:paddingTop="8dp"
+            android:text="pi"
+            android:textSize="22sp"
+            android:textStyle="normal"/>
 
         <Button
             android:id="@+id/mod_button"
-            style="@style/ButtonAltColor1"
+            style="@style/FunctionButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:clickable="true"
+            android:minHeight="1dp"
+            android:paddingBottom="8dp"
+            android:paddingTop="8dp"
             android:text="%"
-            android:textStyle="bold"/>
+            android:textSize="22sp"
+            android:textStyle="normal"/>
+
+        <Button
+            android:id="@+id/left_parenthesis_button"
+            style="@style/FunctionButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:minHeight="1dp"
+            android:paddingBottom="8dp"
+            android:paddingTop="8dp"
+            android:text="("
+            android:textSize="22sp"
+            android:textStyle="normal"/>
+
+        <Button
+            android:id="@+id/right_parenthesis_button"
+            style="@style/FunctionButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:minHeight="1dp"
+            android:paddingBottom="9dp"
+            android:paddingTop="9dp"
+            android:text=")"
+            android:textSize="22sp"
+            android:textStyle="normal"/>
 
     </LinearLayout>
 
@@ -238,7 +317,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="1"/>
+            android:minHeight="1dp"
+            android:paddingBottom="9dp"
+            android:paddingTop="9dp"
+            android:text="1"
+            android:textSize="28sp"
+            android:textStyle="normal"/>
 
         <Button
             android:id="@+id/two_button"
@@ -246,7 +330,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="2"/>
+            android:minHeight="1dp"
+            android:paddingBottom="9dp"
+            android:paddingTop="9dp"
+            android:text="2"
+            android:textSize="28sp"
+            android:textStyle="normal"/>
 
         <Button
             android:id="@+id/three_button"
@@ -254,7 +343,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="3"/>
+            android:minHeight="1dp"
+            android:paddingBottom="9dp"
+            android:paddingTop="9dp"
+            android:text="3"
+            android:textSize="28sp"
+            android:textStyle="normal"/>
 
         <Button
             android:id="@+id/backspace_button"
@@ -262,7 +356,12 @@
             android:layout_width="wrap_content"
             android:layout_height="fill_parent"
             android:layout_weight="1"
-            android:text="Del"/>
+            android:minHeight="1dp"
+            android:paddingBottom="9dp"
+            android:paddingTop="9dp"
+            android:text="DEL"
+            android:textSize="28sp"
+            android:textStyle="bold"/>
 
         <Button
             android:id="@+id/clear_button"
@@ -271,7 +370,11 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:clickable="true"
+            android:minHeight="1dp"
+            android:paddingBottom="9dp"
+            android:paddingTop="9dp"
             android:text="C"
+            android:textSize="28sp"
             android:textStyle="bold"/>
 
     </LinearLayout>
@@ -287,7 +390,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="4"/>
+            android:minHeight="1dp"
+            android:paddingBottom="9dp"
+            android:paddingTop="9dp"
+            android:text="4"
+            android:textSize="28sp"
+            android:textStyle="normal"/>
 
         <Button  android:id="@+id/five_button"
             style="@style/NumberButton"
@@ -295,7 +403,12 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:hapticFeedbackEnabled="true"
-            android:text="5"/>
+            android:minHeight="1dp"
+            android:paddingBottom="9dp"
+            android:paddingTop="9dp"
+            android:text="5"
+            android:textSize="28sp"
+            android:textStyle="normal"/>
 
         <Button
             android:id="@+id/six_button"
@@ -303,7 +416,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="6"/>
+            android:minHeight="1dp"
+            android:paddingBottom="9dp"
+            android:paddingTop="9dp"
+            android:text="6"
+            android:textSize="28sp"
+            android:textStyle="normal"/>
 
         <Button
             android:id="@+id/multiply_button"
@@ -311,9 +429,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:minHeight="1dp"
+            android:paddingBottom="9dp"
+            android:paddingTop="9dp"
             android:text="*"
-            android:textStyle="bold"
-            />
+            android:textSize="28sp"
+            android:textStyle="normal"/>
 
         <Button
             android:id="@+id/divide_button"
@@ -322,9 +443,12 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:clickable="true"
+            android:minHeight="1dp"
+            android:paddingBottom="9dp"
+            android:paddingTop="9dp"
             android:text="/"
-            android:textStyle="bold"
-            />
+            android:textSize="28sp"
+            android:textStyle="normal"/>
 
     </LinearLayout>
 
@@ -339,7 +463,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="7"/>
+            android:minHeight="1dp"
+            android:paddingBottom="9dp"
+            android:paddingTop="9dp"
+            android:text="7"
+            android:textSize="28sp"
+            android:textStyle="normal"/>
 
         <Button
             android:id="@+id/eight_button"
@@ -347,7 +476,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="8"/>
+            android:minHeight="1dp"
+            android:paddingBottom="9dp"
+            android:paddingTop="9dp"
+            android:text="8"
+            android:textSize="28sp"
+            android:textStyle="normal"/>
 
         <Button
             android:id="@+id/nine_button"
@@ -355,7 +489,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="9"/>
+            android:minHeight="1dp"
+            android:paddingBottom="9dp"
+            android:paddingTop="9dp"
+            android:text="9"
+            android:textSize="28sp"
+            android:textStyle="normal"/>
 
         <Button
             android:id="@+id/add_button"
@@ -363,9 +502,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:minHeight="1dp"
+            android:paddingBottom="9dp"
+            android:paddingTop="9dp"
             android:text="+"
-            android:textStyle="bold"
-            />
+            android:textSize="28sp"
+            android:textStyle="normal"/>
 
         <Button
             android:id="@+id/subtract_button"
@@ -373,9 +515,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:minHeight="1dp"
+            android:paddingBottom="9dp"
+            android:paddingTop="9dp"
             android:text="-"
-            android:textStyle="bold"
-            />
+            android:textSize="28sp"
+            android:textStyle="normal"/>
 
     </LinearLayout>
 
@@ -390,7 +535,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="0"/>
+            android:minHeight="1dp"
+            android:paddingBottom="9dp"
+            android:paddingTop="9dp"
+            android:text="0"
+            android:textSize="28sp"
+            android:textStyle="normal"/>
 
         <Button
             android:id="@+id/period_button"
@@ -398,8 +548,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:minHeight="1dp"
+            android:paddingBottom="9dp"
+            android:paddingTop="9dp"
             android:text="."
-            android:textStyle="bold"/>
+            android:textSize="28sp"
+            android:textStyle="normal"/>
 
         <Button
             android:id="@+id/plusMinus_button"
@@ -407,8 +561,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:minHeight="1dp"
+            android:paddingBottom="9dp"
+            android:paddingTop="9dp"
             android:text="+/-"
-            android:textStyle="bold"/>
+            android:textSize="28sp"
+            android:textStyle="normal"/>
 
         <Button
             android:id="@+id/scientific_notation_button"
@@ -417,8 +575,12 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:clickable="true"
+            android:minHeight="1dp"
+            android:paddingBottom="9dp"
+            android:paddingTop="9dp"
             android:text="EXP"
-            />
+            android:textSize="28sp"
+            android:textStyle="normal"/>
 
         <Button
             android:id="@+id/equals_button"
@@ -426,10 +588,17 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:minHeight="1dp"
+            android:paddingBottom="9dp"
+            android:paddingTop="9dp"
             android:text="="
-            android:textStyle="bold"
-            />
+            android:textSize="28sp"
+            android:textStyle="bold"/>
 
     </LinearLayout>
 
 </LinearLayout>
+
+</ScrollView>
+
+    </LinearLayout>

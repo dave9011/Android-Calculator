@@ -39,6 +39,7 @@ public class Calculator extends ActionBarActivity implements View.OnClickListene
     public final int NUM_HISTORY_SAVED = 10;
     private final String PI_SYMBOL = "\u03C0";
     private final String SQRT_SYMBOL = "\u221A";
+    private final String CUBE_ROOT_SYMBOL = "\u00b3\u221a";
     private final String LOG_BASE_2_SYMBOL = "\u2082";
 
     private boolean SHIFT_DOWN =false;
@@ -74,6 +75,7 @@ public class Calculator extends ActionBarActivity implements View.OnClickListene
 
     private Button b_mod;
     private Button b_sqrt;
+    private Button b_cbrt;
     private Button b_exp_2;
     private Button b_exp_3;
     private Button b_exp_n;
@@ -152,6 +154,8 @@ public class Calculator extends ActionBarActivity implements View.OnClickListene
 
         setButtonSpecialSymbols();
 
+        displayView.setHint(Html.fromHtml("<small><small><small>" + "Tap here to show history" + "</small></small></small>"));
+
         mParser = new Parser();
 
     }
@@ -179,6 +183,7 @@ public class Calculator extends ActionBarActivity implements View.OnClickListene
         b_cos = (Button)findViewById(R.id.cos_button);
         b_tan = (Button)findViewById(R.id.tan_button);
         b_sqrt = (Button)findViewById(R.id.square_root_button);
+        b_cbrt = (Button)findViewById(R.id.cube_root_button);
         b_exp_2 = (Button)findViewById(R.id.exponent_2_button);
         b_exp_3 = (Button)findViewById(R.id.exponent_3_button);
         b_exp_n = (Button)findViewById(R.id.exponent_n_button);
@@ -190,6 +195,7 @@ public class Calculator extends ActionBarActivity implements View.OnClickListene
         b_cos.setOnClickListener(this);
         b_tan.setOnClickListener(this);
         b_sqrt.setOnClickListener(this);
+        b_cbrt.setOnClickListener(this);
         b_exp_2.setOnClickListener(this);
         b_exp_3.setOnClickListener(this);
         b_exp_n.setOnClickListener(this);
@@ -225,6 +231,7 @@ public class Calculator extends ActionBarActivity implements View.OnClickListene
     private void setButtonSpecialSymbols(){
         b_pi.setText(PI_SYMBOL);
         b_sqrt.setText(SQRT_SYMBOL);
+        b_cbrt.setText(CUBE_ROOT_SYMBOL);
     }
 
     @Override
@@ -263,6 +270,12 @@ public class Calculator extends ActionBarActivity implements View.OnClickListene
                 break;
             }
 
+            case R.id.cube_root_button:{
+                String text = displayView.getText().toString();
+                appendFunction(text, "cbrt");
+                break;
+            }
+
             case R.id.natural_log_button: {
                 String text = displayView.getText().toString();
                 appendFunction(text, "ln");
@@ -287,12 +300,8 @@ public class Calculator extends ActionBarActivity implements View.OnClickListene
                 break;
             }
 
-            //TODO: finish this
             case R.id.exponent_n_button: {
-                //String x = displayView.getText().toString();
-                //sidePanel.setText(b_exp_n.getText());
                 appendValue("^");
-                //displayView.setText(Html.fromHtml("x<sup>n</sup>"));
                 break;
             }
 
@@ -630,13 +639,14 @@ public class Calculator extends ActionBarActivity implements View.OnClickListene
 
             expr.accept(new SetVariable("pi", Math.PI));
 
-            String result = expr.getValue()+"";
+            double resultToStore = expr.getValue();
+            double resultToDisplay = (double)Math.round(resultToStore * 100000000) / 100000000;
 
             Log.v(TAG, "The value of " + originalExpression + " is " + expr.getValue());
 
             displayView.setText("");
-            appendValue(result);
-            addToHistory(originalExpression, result);
+            appendValue(resultToDisplay + "");
+            addToHistory(originalExpression, resultToStore + "");
 
         }
         catch (ParserException e)

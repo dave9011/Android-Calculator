@@ -4,6 +4,8 @@
 
     <item android:drawable="@color/num_btn_pressed_color" android:state_pressed="true"/> <!-- pressed -->
     <item android:drawable="@color/num_btn_pressed_color" android:state_focused="true"/> <!-- focused -->
-    <item android:drawable="@color/number_btn_default"/> <!-- default -->
+    <item android:drawable="@color/number_btn_default"/>
+
+    <!-- default -->
 
 </selector>
