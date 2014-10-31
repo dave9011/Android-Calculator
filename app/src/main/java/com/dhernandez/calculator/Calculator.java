@@ -30,6 +30,8 @@ import com.dhernandez.calculator.utils.SetVariable;
 import java.util.ArrayList;
 
 
+//TODO: add copy paste to history
+
 public class Calculator extends ActionBarActivity implements View.OnClickListener {
 
     public static final String TAG = Calculator.class.getSimpleName();
@@ -260,26 +262,22 @@ public class Calculator extends ActionBarActivity implements View.OnClickListene
             }
 
             case R.id.square_root_button: {
-                String text = displayView.getText().toString();
                 appendValue("sqrt"+"(");
                 break;
             }
 
             case R.id.cube_root_button:{
-                String text = displayView.getText().toString();
                 appendValue("cbrt"+"(");
                 break;
             }
 
             case R.id.natural_log_button: {
-                String text = displayView.getText().toString();
                 appendValue("ln"+"(");
                 break;
             }
 
             case R.id.log_button: {
-                String text = displayView.getText().toString();
-                handleBasedLog(text);
+                handleBasedLog();
                 break;
             }
 
@@ -399,20 +397,29 @@ public class Calculator extends ActionBarActivity implements View.OnClickListene
                 break;
 
             case R.id.sin_button: {
-                String text = displayView.getText().toString();
-                appendValue(mSinText+"(");
+                if(SHIFT_DOWN){
+                    appendValue( "a" + mSinText+"(");
+                } else {
+                    appendValue(mSinText+"(");
+                }
                 break;
             }
 
             case R.id.cos_button: {
-                String text = displayView.getText().toString();
-                appendValue(mCosText+"(");
+                if(SHIFT_DOWN){
+                    appendValue( "a" + mCosText+"(");
+                } else {
+                    appendValue(mCosText+"(");
+                }
                 break;
             }
 
             case R.id.tan_button: {
-                String text = displayView.getText().toString();
-                appendValue(mTanText+"(");
+                if(SHIFT_DOWN){
+                    appendValue( "a" + mTanText+"(");
+                } else {
+                    appendValue(mTanText+"(");
+                }
                 break;
             }
 
@@ -429,9 +436,13 @@ public class Calculator extends ActionBarActivity implements View.OnClickListene
 
         }
 
+        if(view.getId() != R.id.shift_button && SHIFT_DOWN){
+            changeDisplayOnShift();
+        }
+
     }
 
-    private void handleBasedLog(String text) {
+    private void handleBasedLog() {
         if(SHIFT_DOWN){
             appendValue("log"+LOG_BASE_2_SYMBOL);
         } else {
@@ -506,17 +517,6 @@ public class Calculator extends ActionBarActivity implements View.OnClickListene
 //            displayView.setText( function + "(" + text + ")" );
 //        }
 //    }
-
-    //Possibly deprecated
-    private void handleTrigFunction(String text, String trigFunction) {
-        if (text.isEmpty()) {
-            text = trigFunction + "(";
-        } else {
-            text = trigFunction + "(" + text + ")";
-        }
-        displayView.setText("");
-        appendValue(text);
-    }
 
     private void handlePlusMinus(String disText) {
         if (disText.isEmpty()) {

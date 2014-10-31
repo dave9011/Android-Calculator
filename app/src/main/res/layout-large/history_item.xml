@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:background="@android:color/transparent" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/history_horizontal_margin"
+        android:layout_marginRight="@dimen/history_horizontal_margin"
+        android:layout_marginTop="@dimen/history_vertical_padding">
+
+        <TextView
+            android:id="@+id/expressionLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:paddingTop="@dimen/history_vertical_padding"
+            android:text="New Text"
+            android:textColor="@color/number_btn_default"
+            android:textSize="26sp"
+            />
+
+        <TextView
+            android:id="@+id/resultLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@id/expressionLabel"
+            android:paddingBottom="@dimen/history_vertical_padding"
+            android:text="Test Name"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@color/calculator_background"
+            android:textSize="35sp"/>
+
+
+    </RelativeLayout>
+
+</LinearLayout>
