@@ -2,8 +2,12 @@ package com.dhernandez.calculator;
 
 import android.annotation.TargetApi;
 import android.app.AlertDialog;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Vibrator;
+import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBarActivity;
 import android.text.Editable;
 import android.text.Html;
@@ -13,7 +17,6 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.SoundEffectConstants;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -29,9 +32,6 @@ import com.dhernandez.calculator.utils.SetVariable;
 
 import java.util.ArrayList;
 
-
-//TODO: add copy paste to history
-
 public class Calculator extends ActionBarActivity implements View.OnClickListener {
 
     public static final String TAG = Calculator.class.getSimpleName();
@@ -41,10 +41,10 @@ public class Calculator extends ActionBarActivity implements View.OnClickListene
     private final String SQRT_SYMBOL = "\u221A";
     private final String CUBE_ROOT_SYMBOL = "\u00b3\u221a";
     private final String LOG_BASE_2_SYMBOL = "\u2082";
-
+    SharedPreferences mSharedPref;
     private boolean SHIFT_DOWN =false;
     private boolean CLICK_SOUND_ENABLED = true;
-
+    private boolean HAPTIC_FEEDBACK_ENABLED = true;
     private EditText displayView;
     private Button b_clear;
     private Button b_0;
@@ -72,7 +72,6 @@ public class Calculator extends ActionBarActivity implements View.OnClickListene
     private Button b_scientific_notation;
     private Button b_pi;
     private Button b_backspace;
-
     private Button b_mod;
     private Button b_sqrt;
     private Button b_cbrt;
@@ -82,18 +81,23 @@ public class Calculator extends ActionBarActivity implements View.OnClickListene
     private Button b_log;
     private Button b_ln;
     private Button b_reciprocal;
-
+    private Button b_eulers;
     private Button b_shift;
-
     private Editable mDisplayText;
-
     private ArrayList<HistoryItem> mHistoryList = new ArrayList<HistoryItem>();
-
     private Parser mParser;
-
     private String mSinText = "sin";
     private String mCosText = "cos";
     private String mTanText = "tan";
+    private Vibrator myVib;
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mSharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+        //CLICK_SOUND_ENABLED = mSharedPref.getBoolean(getString(R.string.preferences_sound_on_press_key), false);
+        HAPTIC_FEEDBACK_ENABLED = mSharedPref.getBoolean(getString(R.string.preferences_vibrate_key), false);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -105,8 +109,12 @@ public class Calculator extends ActionBarActivity implements View.OnClickListene
 
         getSupportActionBar().hide();
 
+        myVib = (Vibrator) this.getSystemService(VIBRATOR_SERVICE);
+
         //Set activity background color
         getWindow().getDecorView().setBackgroundColor(getResources().getColor(R.color.calculator_background) );
+
+        PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
 
         init();
 
@@ -134,6 +142,8 @@ public class Calculator extends ActionBarActivity implements View.OnClickListene
 
         b_shift = (Button)findViewById(R.id.shift_button);
 
+        b_eulers = (Button)findViewById(R.id.eulers_button);
+
         displayView.setOnClickListener(this);
 
         b_clear.setOnClickListener(this);
@@ -147,6 +157,8 @@ public class Calculator extends ActionBarActivity implements View.OnClickListene
         b_right_parenthesis.setOnClickListener(this);
 
         b_shift.setOnClickListener(this);
+
+        b_eulers.setOnClickListener(this);
 
         setOperatorButtonVariables();
         setFunctionButtonVariables();
@@ -228,6 +240,10 @@ public class Calculator extends ActionBarActivity implements View.OnClickListene
         b_9.setOnClickListener(this);
     }
 
+    /**
+     * Set the special symbols as the the text for buttons that require them; these special
+     * symbols are constants saved as Unicode patterns.
+     */
     private void setButtonSpecialSymbols(){
         b_pi.setText(PI_SYMBOL);
         b_sqrt.setText(SQRT_SYMBOL);
@@ -238,8 +254,12 @@ public class Calculator extends ActionBarActivity implements View.OnClickListene
     public void onClick(View view) {
 
         //TODO: add option to enable and disable click from within app
-        if(CLICK_SOUND_ENABLED){
-            view.playSoundEffect(SoundEffectConstants.CLICK);
+       // if(CLICK_SOUND_ENABLED){
+       //     view.playSoundEffect(SoundEffectConstants.CLICK);
+      //  }
+
+        if(HAPTIC_FEEDBACK_ENABLED){
+            myVib.vibrate(30);
         }
 
         int button_id = view.getId();
@@ -261,18 +281,22 @@ public class Calculator extends ActionBarActivity implements View.OnClickListene
                 break;
             }
 
+            case R.id.eulers_button:
+                appendValue(b_eulers.getText() + "^");
+                break;
+
             case R.id.square_root_button: {
-                appendValue("sqrt"+"(");
+                appendValue(SQRT_SYMBOL+"(");
                 break;
             }
 
             case R.id.cube_root_button:{
-                appendValue("cbrt"+"(");
+                appendValue(CUBE_ROOT_SYMBOL+"(");
                 break;
             }
 
             case R.id.natural_log_button: {
-                appendValue("ln"+"(");
+                appendValue(b_ln.getText() +"(");
                 break;
             }
 
@@ -450,6 +474,12 @@ public class Calculator extends ActionBarActivity implements View.OnClickListene
         }
     }
 
+
+    /**
+     * Changes the background drawable and text for buttons that have a secondary function based
+     * on the SHIFT_DOWN flag with is true when the secondary functions should be displayed and
+     * false when the primary/default functions should be displayed.
+     */
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     private void changeDisplayOnShift(){
 
@@ -508,16 +538,11 @@ public class Calculator extends ActionBarActivity implements View.OnClickListene
         evaluateExpression(text);
     }
 
-    //TODO: look to see if there is a proper way to implement this, if not then remove it
-//    private void appendFunction(String text, String function) {
-//        if(text.isEmpty()){
-//            displayView.setText( function + "(" );
-//        }
-//        else {
-//            displayView.setText( function + "(" + text + ")" );
-//        }
-//    }
-
+    /**
+     * Negates a value by checking the first character to determine what the negated value should be.
+     *
+     * @param disText the negated text
+     */
     private void handlePlusMinus(String disText) {
         if (disText.isEmpty()) {
             appendValue("-");
@@ -598,7 +623,6 @@ public class Calculator extends ActionBarActivity implements View.OnClickListene
         listView.setOnItemClickListener( new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-                displayView.setText("");
                 appendValue(mHistoryList.get(position).getResult());
                 dialog.dismiss();
             }
@@ -624,8 +648,18 @@ public class Calculator extends ActionBarActivity implements View.OnClickListene
                 expStr = expStr.replaceAll(PI_SYMBOL, "pi");
                 usesPI = true;
             }
+            if(expStr.contains(CUBE_ROOT_SYMBOL)){
+                expStr = expStr.replaceAll(CUBE_ROOT_SYMBOL, "cbrt");
+            }
+            if(expStr.contains(SQRT_SYMBOL)){
+                expStr = expStr.replaceAll(SQRT_SYMBOL, "sqrt");
+            }
+
             if(expStr.contains(LOG_BASE_2_SYMBOL)){
                 expStr = expStr.replaceAll(LOG_BASE_2_SYMBOL, "2 ");
+            }
+            if(expStr.contains(b_eulers.getText() + "^")){
+                expStr = expStr.replaceAll(b_eulers.getText() + "\\^", "exp ");
             }
 
             ExpressionNode expr = mParser.parse(expStr);
@@ -633,13 +667,25 @@ public class Calculator extends ActionBarActivity implements View.OnClickListene
             expr.accept(new SetVariable("pi", Math.PI));
 
             double resultToStore = expr.getValue();
-            double resultToDisplay = (double)Math.round(resultToStore * 100000000) / 100000000;
 
-            Log.v(TAG, "The value of " + originalExpression + " is " + expr.getValue());
+            Log.v(TAG, "The value of " + originalExpression + " is " + resultToStore);
 
             displayView.setText("");
-            appendValue(resultToDisplay + "");
-            addToHistory(originalExpression, resultToStore + "");
+
+            if(Double.isNaN(resultToStore)){
+                Log.v(TAG, "answer is NaN");
+                appendValue("Not a Number");
+                addToHistory(originalExpression, "NaN");
+            }
+            else if(Double.isInfinite(resultToStore)){
+                Log.v(TAG, "answer is Infinite");
+                appendValue("Infinity");
+                addToHistory(originalExpression, "Infinity");
+            } else {
+                double resultToDisplay = (double)Math.round(resultToStore * 100000000) / 100000000;
+                appendValue(resultToDisplay + "");
+                addToHistory(originalExpression, resultToStore + "");
+            }
 
         }
         catch (ParserException e)
@@ -674,6 +720,11 @@ public class Calculator extends ActionBarActivity implements View.OnClickListene
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch(item.getItemId()){
+
+            case R.id.action_settings:
+                Intent intent = new Intent(Calculator.this, SettingsActivity.class);
+                startActivity(intent);
+                return true;
 
             case R.id.action_clear_history:
                 mHistoryList.clear();

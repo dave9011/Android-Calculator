@@ -2,10 +2,14 @@
 <resources>
 
     <color name="calculator_button_background">#efefef</color>
-    <color name="calculator_background">#343336</color>
+
+    <!-- <color name="calculator_background">#343336</color> -->
+
+    <color name="calculator_background">#D1D5D8</color>
     <color name="apptheme_color">#ff4444</color>
     <color name="display_background">#D1D5D8</color>
     <color name="history_title_background">#ff3b3a3d</color>
+    <color name="history_result_text_color">#343336</color>
 
     <color name="action_bar_color">#FBA026</color>
 
@@ -20,7 +24,7 @@
     <color name="button_altColor_1_default">#00A885</color>
     <color name="button_altColor_1_pressed">#007e63</color>
     <color name="button_altColor_2_default">#FBA026</color>
-    <color name="button_altColor_2_pressed">#ffe77e03</color>
+    <color name="button_altColor_2_pressed">#F37934</color>
 
     <color name="button_on_shift_color_default">#2969B0</color>
     <color name="button_on_shift_color_pressed">#ff1e4d81</color>

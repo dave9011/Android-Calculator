@@ -32,7 +32,7 @@
             android:paddingBottom="@dimen/history_vertical_padding"
             android:text="Test Name"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textColor="@color/calculator_background"
+            android:textColor="@color/history_result_text_color"
             android:textSize="20sp"/>
 
 

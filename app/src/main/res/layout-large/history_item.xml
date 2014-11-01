@@ -20,7 +20,7 @@
             android:paddingTop="@dimen/history_vertical_padding"
             android:text="New Text"
             android:textColor="@color/number_btn_default"
-            android:textSize="26sp"
+            android:textSize="22sp"
             />
 
         <TextView
@@ -32,8 +32,8 @@
             android:paddingBottom="@dimen/history_vertical_padding"
             android:text="Test Name"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textColor="@color/calculator_background"
-            android:textSize="35sp"/>
+            android:textColor="@color/history_result_text_color"
+            android:textSize="26sp"/>
 
 
     </RelativeLayout>

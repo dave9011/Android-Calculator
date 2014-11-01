@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <CheckBoxPreference
+        android:defaultValue="true"
+        android:key="@string/preferences_vibrate_key"
+        android:title="Vibrate on touch" />
+
+  <!--  <CheckBoxPreference
+        android:key="@string/preferences_sound_on_press_key"
+        android:title="Sound on key press"
+        android:defaultValue="true" />   -->
+
+</PreferenceScreen>

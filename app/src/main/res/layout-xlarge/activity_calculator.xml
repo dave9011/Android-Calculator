@@ -290,6 +290,21 @@
             />
 
         <Button
+            android:id="@+id/eulers_button"
+            style="@style/FunctionButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:minHeight="1dp"
+            android:minWidth="1dp"
+            android:paddingBottom="15dp"
+            android:paddingTop="15dp"
+            android:text="e"
+            android:textSize="35sp"
+            android:textStyle="normal"/>
+
+        <Button
             android:id="@+id/mod_button"
             style="@style/FunctionButton"
             android:layout_width="wrap_content"
@@ -612,7 +627,7 @@
             android:paddingBottom="9dp"
             android:paddingTop="9dp"
             android:text="E"
-            android:textSize="70sp"
+            android:textSize="65sp"
             android:textStyle="normal"/>
 
         <Button
