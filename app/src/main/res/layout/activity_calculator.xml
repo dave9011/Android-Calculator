@@ -263,6 +263,21 @@
             android:textStyle="normal"/>
 
         <Button
+            android:id="@+id/eulers_button"
+            style="@style/FunctionButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:minHeight="1dp"
+            android:paddingBottom="8dp"
+            android:paddingTop="8dp"
+            android:singleLine="false"
+            android:text="e"
+            android:textSize="22sp"
+            android:textStyle="normal"/>
+
+        <Button
             android:id="@+id/mod_button"
             style="@style/FunctionButton"
             android:layout_width="wrap_content"
@@ -298,8 +313,8 @@
             android:layout_weight="1"
             android:clickable="true"
             android:minHeight="1dp"
-            android:paddingBottom="9dp"
-            android:paddingTop="9dp"
+            android:paddingBottom="8dp"
+            android:paddingTop="8dp"
             android:text=")"
             android:textSize="22sp"
             android:textStyle="normal"/>
