@@ -12,5 +12,8 @@
     <string name="action_enable_sound_label">Enable sound</string>
     <string name="preferences_vibrate_key">pref_vibrate</string>
     <string name="preferences_sound_on_press_key">pref_key_press_sound</string>
+    <string name="preferences_keep_screen_on_key">pref_keep_screen_on</string>
+    <string name="pref_vibrate_title">Vibrate On Touch</string>
+    <string name="pref_keep_screen_on_title">Keep Screen On</string>
 
 </resources>

@@ -5,11 +5,16 @@
     <CheckBoxPreference
         android:defaultValue="true"
         android:key="@string/preferences_vibrate_key"
-        android:title="Vibrate on touch" />
+        android:title="@string/pref_vibrate_title" />
 
   <!--  <CheckBoxPreference
         android:key="@string/preferences_sound_on_press_key"
         android:title="Sound on key press"
         android:defaultValue="true" />   -->
+
+    <CheckBoxPreference
+        android:defaultValue="false"
+        android:key="@string/preferences_keep_screen_on_key"
+        android:title="@string/pref_keep_screen_on_title" />
 
 </PreferenceScreen>

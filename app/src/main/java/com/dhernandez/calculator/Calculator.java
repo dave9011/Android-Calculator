@@ -18,6 +18,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
@@ -45,6 +46,7 @@ public class Calculator extends ActionBarActivity implements View.OnClickListene
     private boolean SHIFT_DOWN =false;
     private boolean CLICK_SOUND_ENABLED = true;
     private boolean HAPTIC_FEEDBACK_ENABLED = true;
+    private boolean KEEP_SCREEN_ON = false;
     private EditText displayView;
     private Button b_clear;
     private Button b_0;
@@ -94,9 +96,17 @@ public class Calculator extends ActionBarActivity implements View.OnClickListene
     @Override
     protected void onResume() {
         super.onResume();
-        mSharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+
         //CLICK_SOUND_ENABLED = mSharedPref.getBoolean(getString(R.string.preferences_sound_on_press_key), false);
         HAPTIC_FEEDBACK_ENABLED = mSharedPref.getBoolean(getString(R.string.preferences_vibrate_key), false);
+        KEEP_SCREEN_ON = mSharedPref.getBoolean(getString(R.string.preferences_keep_screen_on_key), false);
+
+        if(KEEP_SCREEN_ON){
+            getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+        } else {
+            getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+        }
+
     }
 
     @Override
@@ -115,6 +125,8 @@ public class Calculator extends ActionBarActivity implements View.OnClickListene
         getWindow().getDecorView().setBackgroundColor(getResources().getColor(R.color.calculator_background) );
 
         PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
+
+        mSharedPref = PreferenceManager.getDefaultSharedPreferences(this);
 
         init();
 
