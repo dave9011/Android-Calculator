@@ -1,6 +1,20 @@
 <!-- Generated with http://android-holo-colors.com -->
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
 
+
+    <style name="CalculatorTheme_1" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="android:buttonStyle">@style/Theme_1_ButtonStyle</item>
+    </style>
+
+    <style name="Theme_1_ButtonStyle" parent="android:Widget.Button">
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:hapticFeedbackEnabled">true</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:minWidth">64dip</item>
+    </style>
+
+
+
     <style name="AppTheme" parent="@style/_AppTheme"/>
 
     <style name="_AppTheme" parent="Theme.AppCompat.Light">
@@ -8,8 +22,8 @@
     </style>
 
     <style name="ButtonAppTheme" parent="android:Widget.Button">
-       <!-- <item name="android:minHeight">48dip</item>
-        <item name="android:minWidth">64dip</item> -->
+        <!-- <item name="android:minHeight">48dip</item>
+         <item name="android:minWidth">64dip</item> -->
         <item name="android:textColor">@android:color/white</item>
         <item name="android:textStyle">bold</item>
         <item name="android:hapticFeedbackEnabled">true</item>
@@ -17,27 +31,27 @@
 
     <style name="NumberButton">
         <item name="android:background">@drawable/num_btn_custom</item>
-        <item name="android:layout_margin">2dp</item>
+        <item name="android:layout_margin">1dp</item>
     </style>
 
     <style name="OperatorButton">
         <item name="android:background">@drawable/operator_btn_custom</item>
-        <item name="android:layout_margin">2dp</item>
+        <item name="android:layout_margin">1dp</item>
     </style>
 
     <style name="ButtonAltColor1">
         <item name="android:background">@drawable/btn_alt1_custom</item>
-        <item name="android:layout_margin">2dp</item>
+        <item name="android:layout_margin">1dp</item>
     </style>
 
     <style name="ButtonAltColor2">
         <item name="android:background">@drawable/btn_alt2_custom</item>
-        <item name="android:layout_margin">2dp</item>
+        <item name="android:layout_margin">1dp</item>
     </style>
 
     <style name="FunctionButton">
         <item name="android:background">@drawable/function_btn_custom</item>
-        <item name="android:layout_margin">2dp</item>
+        <item name="android:layout_margin">1dp</item>
         <item name="android:textSize">16sp</item>
     </style>
 

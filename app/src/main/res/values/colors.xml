@@ -5,28 +5,30 @@
 
     <!-- <color name="calculator_background">#343336</color> -->
 
-    <color name="calculator_background">#D1D5D8</color>
+    <color name="calculator_background">#2E2633</color>
     <color name="apptheme_color">#ff4444</color>
-    <color name="display_background">#D1D5D8</color>
+    <color name="display_background">#EFFFCD</color>
     <color name="history_title_background">#ff3b3a3d</color>
     <color name="history_result_text_color">#343336</color>
 
-    <color name="action_bar_color">#FBA026</color>
+    <color name="action_bar_color">#99173C</color>
 
-    <color name="number_btn_default">#E25041</color>
-    <color name="num_btn_pressed_color">#b03f32</color>
-    <color name="operator_btn_default">#00A885</color>
-    <color name="operator_btn_pressed">#007e63</color>
+    <color name="number_btn_default">#555152</color>
+    <color name="num_btn_pressed_color">#ff413c3d</color>
+    <color name="operator_btn_default">#99173C</color>
+    <color name="operator_btn_pressed">#7d1436</color>
 
-    <color name="function_btn_default">#553982</color>
-    <color name="function_btn_pressed">#432d67</color>
+    <color name="function_btn_default">#99173C</color>
+    <color name="function_btn_pressed">#7d1436</color>
 
-    <color name="button_altColor_1_default">#00A885</color>
-    <color name="button_altColor_1_pressed">#007e63</color>
-    <color name="button_altColor_2_default">#FBA026</color>
-    <color name="button_altColor_2_pressed">#F37934</color>
+    <color name="button_altColor_1_default">#555152</color>
+    <color name="button_altColor_1_pressed">#332f30</color>
+    <color name="button_altColor_2_default">#555152</color>
+    <color name="button_altColor_2_pressed">#332f30</color>
 
-    <color name="button_on_shift_color_default">#2969B0</color>
-    <color name="button_on_shift_color_pressed">#ff1e4d81</color>
+    <color name="button_on_shift_color_default">#7d1436</color>
+    <color name="button_on_shift_color_pressed">#ff69112f</color>
+
+    <color name="theme_1_titleTextColor">#DCE9BE</color>
 
 </resources>
