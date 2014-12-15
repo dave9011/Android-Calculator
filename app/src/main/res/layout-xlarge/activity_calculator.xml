@@ -41,10 +41,10 @@
                     android:focusable="false"
                     android:gravity="end|center_vertical"
                     android:maxLines="1"
-                    android:paddingBottom="20dp"
+                    android:paddingBottom="15dp"
                     android:paddingEnd="5dp"
                     android:paddingRight="5dp"
-                    android:paddingTop="20dp"
+                    android:paddingTop="15dp"
                     android:scrollHorizontally="true"
                     android:singleLine="true"
                     android:text="0123456789"
@@ -70,8 +70,8 @@
                     android:layout_height="fill_parent"
                     android:layout_weight="1"
                     android:minHeight="1dp"
-                    android:paddingBottom="8dp"
-                    android:paddingTop="8dp"
+                    android:paddingBottom="15dp"
+                    android:paddingTop="15dp"
                     android:singleLine="true"
                     android:text="Shift"
                     android:textSize="40sp"
@@ -86,8 +86,8 @@
                     android:layout_weight="1"
                     android:clickable="true"
                     android:minHeight="1dp"
-                    android:paddingBottom="8dp"
-                    android:paddingTop="8dp"
+                    android:paddingBottom="15dp"
+                    android:paddingTop="15dp"
                     android:text="log"
                     android:textSize="40sp"
                     android:textStyle="normal"/>
@@ -101,8 +101,8 @@
                     android:layout_weight="1"
                     android:clickable="true"
                     android:minHeight="1dp"
-                    android:paddingBottom="8dp"
-                    android:paddingTop="8dp"
+                    android:paddingBottom="15dp"
+                    android:paddingTop="15dp"
                     android:text="ln"
                     android:textSize="40sp"
                     android:textStyle="normal"/>
@@ -116,8 +116,8 @@
                     android:layout_weight="1"
                     android:clickable="true"
                     android:minHeight="1dp"
-                    android:paddingBottom="8dp"
-                    android:paddingTop="8dp"
+                    android:paddingBottom="15dp"
+                    android:paddingTop="15dp"
                     android:text="sqrt"
                     android:textSize="40sp"
                     android:textStyle="normal"/>
@@ -131,8 +131,8 @@
                     android:layout_weight="1"
                     android:clickable="true"
                     android:minHeight="1dp"
-                    android:paddingBottom="8dp"
-                    android:paddingTop="8dp"
+                    android:paddingBottom="15dp"
+                    android:paddingTop="15dp"
                     android:singleLine="false"
                     android:text="cbrt"
                     android:textSize="40sp"
@@ -147,8 +147,8 @@
                     android:layout_weight="1"
                     android:clickable="true"
                     android:minHeight="1dp"
-                    android:paddingBottom="8dp"
-                    android:paddingTop="8dp"
+                    android:paddingBottom="15dp"
+                    android:paddingTop="15dp"
                     android:text="1/x"
                     android:textSize="40sp"
                     android:textStyle="normal"/>
@@ -171,8 +171,8 @@
                     android:layout_weight="1"
                     android:clickable="true"
                     android:minHeight="1dp"
-                    android:paddingBottom="8dp"
-                    android:paddingTop="8dp"
+                    android:paddingBottom="15dp"
+                    android:paddingTop="15dp"
                     android:text="sin"
                     android:textSize="40sp"
                     android:textStyle="normal"/>
@@ -186,8 +186,8 @@
                     android:layout_weight="1"
                     android:clickable="true"
                     android:minHeight="1dp"
-                    android:paddingBottom="8dp"
-                    android:paddingTop="8dp"
+                    android:paddingBottom="15dp"
+                    android:paddingTop="15dp"
                     android:text="cos"
                     android:textSize="40sp"
                     android:textStyle="normal"/>
@@ -201,8 +201,8 @@
                     android:layout_weight="1"
                     android:clickable="true"
                     android:minHeight="1dp"
-                    android:paddingBottom="8dp"
-                    android:paddingTop="8dp"
+                    android:paddingBottom="15dp"
+                    android:paddingTop="15dp"
                     android:text="tan"
                     android:textSize="40sp"
                     android:textStyle="normal"/>
@@ -216,8 +216,8 @@
                     android:layout_weight="1"
                     android:clickable="true"
                     android:minHeight="1dp"
-                    android:paddingBottom="8dp"
-                    android:paddingTop="8dp"
+                    android:paddingBottom="15dp"
+                    android:paddingTop="15dp"
                     android:text="x\u00b2"
                     android:textSize="40sp"
                     android:textStyle="normal"/>
@@ -232,8 +232,8 @@
                     android:layout_weight="1"
                     android:clickable="true"
                     android:minHeight="1dp"
-                    android:paddingBottom="8dp"
-                    android:paddingTop="8dp"
+                    android:paddingBottom="15dp"
+                    android:paddingTop="15dp"
                     android:text="x\u00b3"
                     android:textSize="40sp"
                     android:textStyle="normal"/>
@@ -247,8 +247,8 @@
                     android:layout_weight="1"
                     android:clickable="true"
                     android:minHeight="1dp"
-                    android:paddingBottom="8dp"
-                    android:paddingTop="8dp"
+                    android:paddingBottom="15dp"
+                    android:paddingTop="15dp"
                     android:text="x\u207f"
                     android:textSize="40sp"
                     android:textStyle="normal"/>
@@ -271,8 +271,8 @@
                     android:layout_weight="1"
                     android:clickable="true"
                     android:minHeight="1dp"
-                    android:paddingBottom="8dp"
-                    android:paddingTop="8dp"
+                    android:paddingBottom="15dp"
+                    android:paddingTop="15dp"
                     android:text="pi"
                     android:textSize="40sp"
                     android:textStyle="normal"/>
@@ -286,8 +286,8 @@
                     android:layout_weight="1"
                     android:clickable="true"
                     android:minHeight="1dp"
-                    android:paddingBottom="8dp"
-                    android:paddingTop="8dp"
+                    android:paddingBottom="15dp"
+                    android:paddingTop="15dp"
                     android:singleLine="false"
                     android:text="e"
                     android:textSize="40sp"
@@ -302,8 +302,8 @@
                     android:layout_weight="1"
                     android:clickable="true"
                     android:minHeight="1dp"
-                    android:paddingBottom="8dp"
-                    android:paddingTop="8dp"
+                    android:paddingBottom="15dp"
+                    android:paddingTop="15dp"
                     android:text="%"
                     android:textSize="40sp"
                     android:textStyle="normal"/>
@@ -317,8 +317,8 @@
                     android:layout_weight="1"
                     android:clickable="true"
                     android:minHeight="1dp"
-                    android:paddingBottom="8dp"
-                    android:paddingTop="8dp"
+                    android:paddingBottom="15dp"
+                    android:paddingTop="15dp"
                     android:text="("
                     android:textSize="40sp"
                     android:textStyle="normal"/>
@@ -332,8 +332,8 @@
                     android:layout_weight="1"
                     android:clickable="true"
                     android:minHeight="1dp"
-                    android:paddingBottom="8dp"
-                    android:paddingTop="8dp"
+                    android:paddingBottom="15dp"
+                    android:paddingTop="15dp"
                     android:text=")"
                     android:textSize="40sp"
                     android:textStyle="normal"/>
@@ -353,10 +353,10 @@
                     android:layout_height="fill_parent"
                     android:layout_weight="1"
                     android:minHeight="1dp"
-                    android:paddingBottom="9dp"
-                    android:paddingTop="9dp"
+                    android:paddingBottom="15dp"
+                    android:paddingTop="15dp"
                     android:text="1"
-                    android:textSize="80sp"
+                    android:textSize="70sp"
                     android:textStyle="normal"/>
 
                 <Button
@@ -367,10 +367,10 @@
                     android:layout_height="fill_parent"
                     android:layout_weight="1"
                     android:minHeight="1dp"
-                    android:paddingBottom="9dp"
-                    android:paddingTop="9dp"
+                    android:paddingBottom="15dp"
+                    android:paddingTop="15dp"
                     android:text="2"
-                    android:textSize="80sp"
+                    android:textSize="70sp"
                     android:textStyle="normal"/>
 
                 <Button
@@ -381,10 +381,10 @@
                     android:layout_height="fill_parent"
                     android:layout_weight="1"
                     android:minHeight="1dp"
-                    android:paddingBottom="9dp"
-                    android:paddingTop="9dp"
+                    android:paddingBottom="15dp"
+                    android:paddingTop="15dp"
                     android:text="3"
-                    android:textSize="80sp"
+                    android:textSize="70sp"
                     android:textStyle="normal"/>
 
                 <Button
@@ -395,8 +395,8 @@
                     android:layout_height="fill_parent"
                     android:layout_weight="1"
                     android:minHeight="1dp"
-                    android:paddingBottom="9dp"
-                    android:paddingTop="9dp"
+                    android:paddingBottom="15dp"
+                    android:paddingTop="15dp"
                     android:text="DEL"
                     android:textSize="70sp"/>
 
@@ -409,8 +409,8 @@
                     android:layout_weight="1"
                     android:clickable="true"
                     android:minHeight="1dp"
-                    android:paddingBottom="9dp"
-                    android:paddingTop="9dp"
+                    android:paddingBottom="15dp"
+                    android:paddingTop="15dp"
                     android:text="C"
                     android:textSize="70sp"/>
 
@@ -429,10 +429,10 @@
                     android:layout_height="fill_parent"
                     android:layout_weight="1"
                     android:minHeight="1dp"
-                    android:paddingBottom="9dp"
-                    android:paddingTop="9dp"
+                    android:paddingBottom="15dp"
+                    android:paddingTop="15dp"
                     android:text="4"
-                    android:textSize="80sp"
+                    android:textSize="70sp"
                     android:textStyle="normal"/>
 
                 <Button
@@ -444,10 +444,10 @@
                     android:layout_weight="1"
                     android:hapticFeedbackEnabled="true"
                     android:minHeight="1dp"
-                    android:paddingBottom="9dp"
-                    android:paddingTop="9dp"
+                    android:paddingBottom="15dp"
+                    android:paddingTop="15dp"
                     android:text="5"
-                    android:textSize="80sp"
+                    android:textSize="70sp"
                     android:textStyle="normal"/>
 
                 <Button
@@ -458,10 +458,10 @@
                     android:layout_height="fill_parent"
                     android:layout_weight="1"
                     android:minHeight="1dp"
-                    android:paddingBottom="9dp"
-                    android:paddingTop="9dp"
+                    android:paddingBottom="15dp"
+                    android:paddingTop="15dp"
                     android:text="6"
-                    android:textSize="80sp"
+                    android:textSize="70sp"
                     android:textStyle="normal"/>
 
                 <Button
@@ -472,10 +472,10 @@
                     android:layout_height="fill_parent"
                     android:layout_weight="1"
                     android:minHeight="1dp"
-                    android:paddingBottom="9dp"
-                    android:paddingTop="9dp"
+                    android:paddingBottom="15dp"
+                    android:paddingTop="15dp"
                     android:text="*"
-                    android:textSize="80sp"
+                    android:textSize="70sp"
                     android:textStyle="normal"/>
 
                 <Button
@@ -487,10 +487,10 @@
                     android:layout_weight="1"
                     android:clickable="true"
                     android:minHeight="1dp"
-                    android:paddingBottom="9dp"
-                    android:paddingTop="9dp"
+                    android:paddingBottom="15dp"
+                    android:paddingTop="15dp"
                     android:text="/"
-                    android:textSize="80sp"
+                    android:textSize="70sp"
                     android:textStyle="normal"/>
 
             </LinearLayout>
@@ -508,10 +508,10 @@
                     android:layout_height="fill_parent"
                     android:layout_weight="1"
                     android:minHeight="1dp"
-                    android:paddingBottom="9dp"
-                    android:paddingTop="9dp"
+                    android:paddingBottom="15dp"
+                    android:paddingTop="15dp"
                     android:text="7"
-                    android:textSize="80sp"
+                    android:textSize="70sp"
                     android:textStyle="normal"/>
 
                 <Button
@@ -522,10 +522,10 @@
                     android:layout_height="fill_parent"
                     android:layout_weight="1"
                     android:minHeight="1dp"
-                    android:paddingBottom="9dp"
-                    android:paddingTop="9dp"
+                    android:paddingBottom="15dp"
+                    android:paddingTop="15dp"
                     android:text="8"
-                    android:textSize="80sp"
+                    android:textSize="70sp"
                     android:textStyle="normal"/>
 
                 <Button
@@ -536,10 +536,10 @@
                     android:layout_height="fill_parent"
                     android:layout_weight="1"
                     android:minHeight="1dp"
-                    android:paddingBottom="9dp"
-                    android:paddingTop="9dp"
+                    android:paddingBottom="15dp"
+                    android:paddingTop="15dp"
                     android:text="9"
-                    android:textSize="80sp"
+                    android:textSize="70sp"
                     android:textStyle="normal"/>
 
                 <Button
@@ -550,10 +550,10 @@
                     android:layout_height="fill_parent"
                     android:layout_weight="1"
                     android:minHeight="1dp"
-                    android:paddingBottom="9dp"
-                    android:paddingTop="9dp"
+                    android:paddingBottom="15dp"
+                    android:paddingTop="15dp"
                     android:text="+"
-                    android:textSize="80sp"
+                    android:textSize="70sp"
                     android:textStyle="normal"/>
 
                 <Button
@@ -564,10 +564,10 @@
                     android:layout_height="fill_parent"
                     android:layout_weight="1"
                     android:minHeight="1dp"
-                    android:paddingBottom="9dp"
-                    android:paddingTop="9dp"
+                    android:paddingBottom="15dp"
+                    android:paddingTop="15dp"
                     android:text="-"
-                    android:textSize="80sp"
+                    android:textSize="70sp"
                     android:textStyle="normal"/>
 
             </LinearLayout>
@@ -585,10 +585,10 @@
                     android:layout_height="fill_parent"
                     android:layout_weight="1"
                     android:minHeight="1dp"
-                    android:paddingBottom="9dp"
-                    android:paddingTop="9dp"
+                    android:paddingBottom="15dp"
+                    android:paddingTop="15dp"
                     android:text="0"
-                    android:textSize="80sp"
+                    android:textSize="70sp"
                     android:textStyle="normal"/>
 
                 <Button
@@ -599,10 +599,10 @@
                     android:layout_height="fill_parent"
                     android:layout_weight="1"
                     android:minHeight="1dp"
-                    android:paddingBottom="9dp"
-                    android:paddingTop="9dp"
+                    android:paddingBottom="15dp"
+                    android:paddingTop="15dp"
                     android:text="."
-                    android:textSize="80sp"
+                    android:textSize="70sp"
                     android:textStyle="normal"/>
 
                 <Button
@@ -613,8 +613,8 @@
                     android:layout_height="fill_parent"
                     android:layout_weight="1"
                     android:minHeight="1dp"
-                    android:paddingBottom="9dp"
-                    android:paddingTop="9dp"
+                    android:paddingBottom="15dp"
+                    android:paddingTop="15dp"
                     android:text="+/-"
                     android:textSize="70sp"
                     android:textStyle="normal"/>
@@ -628,8 +628,8 @@
                     android:layout_weight="1"
                     android:clickable="true"
                     android:minHeight="1dp"
-                    android:paddingBottom="9dp"
-                    android:paddingTop="9dp"
+                    android:paddingBottom="15dp"
+                    android:paddingTop="15dp"
                     android:text="EXP"
                     android:textSize="70sp"
                     android:textStyle="normal"/>
@@ -642,8 +642,8 @@
                     android:layout_height="fill_parent"
                     android:layout_weight="1"
                     android:minHeight="1dp"
-                    android:paddingBottom="9dp"
-                    android:paddingTop="9dp"
+                    android:paddingBottom="15dp"
+                    android:paddingTop="15dp"
                     android:text="="
                     android:textSize="70sp"
                     android:textStyle="bold"/>
