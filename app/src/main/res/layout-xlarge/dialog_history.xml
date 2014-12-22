@@ -24,7 +24,7 @@
             android:layout_marginStart="15dp"
             android:layout_marginTop="10dp"
             android:text="@string/history_dialog_title"
-            android:textColor="@color/function_btn_default"
+            android:textColor="@color/calculator_background"
             android:textSize="36sp"/>
 
 

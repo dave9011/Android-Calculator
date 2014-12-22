@@ -117,7 +117,11 @@ public class Calculator extends ActionBarActivity implements View.OnClickListene
 
         Log.d(TAG, "calculator - CREATED");
 
-        getSupportActionBar().hide();
+        if(getSupportActionBar() != null){
+            getSupportActionBar().hide();
+        }
+
+        //getSupportActionBar().setDisplayHomeAsUpEnabled(false);
 
         myVib = (Vibrator) this.getSystemService(VIBRATOR_SERVICE);
 

@@ -88,7 +88,7 @@
                     android:paddingBottom="15dp"
                     android:paddingTop="15dp"
                     android:text="log"
-                    android:textSize="30sp"
+
                     android:textStyle="normal"/>
 
                 <Button
@@ -103,7 +103,7 @@
                     android:paddingBottom="15dp"
                     android:paddingTop="15dp"
                     android:text="ln"
-                    android:textSize="30sp"
+
                     android:textStyle="normal"/>
 
                 <Button
@@ -118,7 +118,7 @@
                     android:paddingBottom="15dp"
                     android:paddingTop="15dp"
                     android:text="sqrt"
-                    android:textSize="30sp"
+
                     android:textStyle="normal"/>
 
                 <Button
@@ -134,7 +134,7 @@
                     android:paddingTop="15dp"
                     android:singleLine="false"
                     android:text="cbrt"
-                    android:textSize="30sp"
+
                     android:textStyle="normal"/>
 
                 <Button
@@ -149,7 +149,7 @@
                     android:paddingBottom="15dp"
                     android:paddingTop="15dp"
                     android:text="1/x"
-                    android:textSize="30sp"
+
                     android:textStyle="normal"/>
 
             </LinearLayout>
@@ -173,7 +173,7 @@
                     android:paddingBottom="15dp"
                     android:paddingTop="15dp"
                     android:text="sin"
-                    android:textSize="30sp"
+
                     android:textStyle="normal"/>
 
                 <Button
@@ -188,7 +188,7 @@
                     android:paddingBottom="15dp"
                     android:paddingTop="15dp"
                     android:text="cos"
-                    android:textSize="30sp"
+
                     android:textStyle="normal"/>
 
                 <Button
@@ -203,7 +203,7 @@
                     android:paddingBottom="15dp"
                     android:paddingTop="15dp"
                     android:text="tan"
-                    android:textSize="30sp"
+
                     android:textStyle="normal"/>
 
                 <Button
@@ -218,7 +218,7 @@
                     android:paddingBottom="15dp"
                     android:paddingTop="15dp"
                     android:text="x\u00b2"
-                    android:textSize="30sp"
+
                     android:textStyle="normal"/>
 
                 <Button
@@ -234,7 +234,7 @@
                     android:paddingBottom="15dp"
                     android:paddingTop="15dp"
                     android:text="x\u00b3"
-                    android:textSize="30sp"
+
                     android:textStyle="normal"/>
 
                 <Button
@@ -249,7 +249,7 @@
                     android:paddingBottom="15dp"
                     android:paddingTop="15dp"
                     android:text="x\u207f"
-                    android:textSize="30sp"
+
                     android:textStyle="normal"/>
 
             </LinearLayout>
@@ -273,7 +273,7 @@
                     android:paddingBottom="15dp"
                     android:paddingTop="15dp"
                     android:text="pi"
-                    android:textSize="30sp"
+
                     android:textStyle="normal"/>
 
                 <Button
@@ -289,7 +289,7 @@
                     android:paddingTop="15dp"
                     android:singleLine="false"
                     android:text="e"
-                    android:textSize="30sp"
+
                     android:textStyle="normal"/>
 
                 <Button
@@ -304,7 +304,7 @@
                     android:paddingBottom="15dp"
                     android:paddingTop="15dp"
                     android:text="%"
-                    android:textSize="30sp"
+
                     android:textStyle="normal"/>
 
                 <Button
@@ -319,7 +319,7 @@
                     android:paddingBottom="15dp"
                     android:paddingTop="15dp"
                     android:text="("
-                    android:textSize="30sp"
+
                     android:textStyle="normal"/>
 
                 <Button
@@ -334,7 +334,7 @@
                     android:paddingBottom="15dp"
                     android:paddingTop="15dp"
                     android:text=")"
-                    android:textSize="30sp"
+
                     android:textStyle="normal"/>
 
             </LinearLayout>
@@ -355,7 +355,7 @@
                     android:paddingBottom="15dp"
                     android:paddingTop="15dp"
                     android:text="1"
-                    android:textSize="45sp"
+
                     android:textStyle="normal"/>
 
                 <Button
@@ -369,7 +369,7 @@
                     android:paddingBottom="15dp"
                     android:paddingTop="15dp"
                     android:text="2"
-                    android:textSize="45sp"
+
                     android:textStyle="normal"/>
 
                 <Button
@@ -383,7 +383,7 @@
                     android:paddingBottom="15dp"
                     android:paddingTop="15dp"
                     android:text="3"
-                    android:textSize="45sp"
+
                     android:textStyle="normal"/>
 
                 <Button
@@ -412,7 +412,7 @@
                     android:paddingBottom="15dp"
                     android:paddingTop="15dp"
                     android:text="C"
-                    android:textSize="45sp"
+
                     android:textStyle="bold"/>
 
             </LinearLayout>
@@ -433,7 +433,7 @@
                     android:paddingBottom="15dp"
                     android:paddingTop="15dp"
                     android:text="4"
-                    android:textSize="45sp"
+
                     android:textStyle="normal"/>
 
                 <Button
@@ -448,7 +448,7 @@
                     android:paddingBottom="15dp"
                     android:paddingTop="15dp"
                     android:text="5"
-                    android:textSize="45sp"
+
                     android:textStyle="normal"/>
 
                 <Button
@@ -462,7 +462,7 @@
                     android:paddingBottom="15dp"
                     android:paddingTop="15dp"
                     android:text="6"
-                    android:textSize="45sp"
+
                     android:textStyle="normal"/>
 
                 <Button
@@ -476,7 +476,7 @@
                     android:paddingBottom="15dp"
                     android:paddingTop="15dp"
                     android:text="*"
-                    android:textSize="45sp"
+
                     android:textStyle="normal"/>
 
                 <Button
@@ -491,7 +491,7 @@
                     android:paddingBottom="15dp"
                     android:paddingTop="15dp"
                     android:text="/"
-                    android:textSize="45sp"
+
                     android:textStyle="normal"/>
 
             </LinearLayout>
@@ -512,7 +512,7 @@
                     android:paddingBottom="15dp"
                     android:paddingTop="15dp"
                     android:text="7"
-                    android:textSize="45sp"
+
                     android:textStyle="normal"/>
 
                 <Button
@@ -526,7 +526,7 @@
                     android:paddingBottom="15dp"
                     android:paddingTop="15dp"
                     android:text="8"
-                    android:textSize="45sp"
+
                     android:textStyle="normal"/>
 
                 <Button
@@ -540,7 +540,7 @@
                     android:paddingBottom="15dp"
                     android:paddingTop="15dp"
                     android:text="9"
-                    android:textSize="45sp"
+
                     android:textStyle="normal"/>
 
                 <Button
@@ -554,7 +554,7 @@
                     android:paddingBottom="15dp"
                     android:paddingTop="15dp"
                     android:text="+"
-                    android:textSize="45sp"
+
                     android:textStyle="normal"/>
 
                 <Button
@@ -568,7 +568,7 @@
                     android:paddingBottom="15dp"
                     android:paddingTop="15dp"
                     android:text="-"
-                    android:textSize="45sp"
+
                     android:textStyle="normal"/>
 
             </LinearLayout>
@@ -589,7 +589,7 @@
                     android:paddingBottom="15dp"
                     android:paddingTop="15dp"
                     android:text="0"
-                    android:textSize="45sp"
+
                     android:textStyle="normal"/>
 
                 <Button

@@ -7,11 +7,13 @@
 
     <color name="calculator_background">#2E2633</color>
     <color name="apptheme_color">#ff4444</color>
-    <color name="display_background">#EFFFCD</color>
+    <color name="display_background">#DCE9BE</color>
     <color name="history_title_background">#ff3b3a3d</color>
     <color name="history_result_text_color">#343336</color>
+    <color name="history_title_color"></color>
 
     <color name="action_bar_color">#99173C</color>
+    <color name="action_bar_title_color">#DCE9BE</color>
 
     <color name="number_btn_default">#555152</color>
     <color name="num_btn_pressed_color">#ff413c3d</color>
@@ -30,5 +32,7 @@
     <color name="button_on_shift_color_pressed">#ff69112f</color>
 
     <color name="theme_1_titleTextColor">#DCE9BE</color>
+
+    <color name="transparent">#00000000</color>
 
 </resources>
