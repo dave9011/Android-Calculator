@@ -23,10 +23,12 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.dhernandez.calculator.utils.EvaluationException;
 import com.dhernandez.calculator.utils.ExpressionNode;
+import com.dhernandez.calculator.utils.FunctionExpressionNode;
 import com.dhernandez.calculator.utils.Parser;
 import com.dhernandez.calculator.utils.ParserException;
 import com.dhernandez.calculator.utils.SetVariable;
@@ -47,6 +49,7 @@ public class Calculator extends ActionBarActivity implements View.OnClickListene
     private boolean CLICK_SOUND_ENABLED = true;
     private boolean HAPTIC_FEEDBACK_ENABLED = true;
     private boolean KEEP_SCREEN_ON = false;
+    private boolean inRadians = true;
     private EditText displayView;
     private Button b_clear;
     private Button b_0;
@@ -68,6 +71,7 @@ public class Calculator extends ActionBarActivity implements View.OnClickListene
     private Button b_right_parenthesis;
     private Button b_plusMinus;
     private Button b_equals;
+    private Button b_angle_units;
     private Button b_sin;
     private Button b_cos;
     private Button b_tan;
@@ -86,11 +90,14 @@ public class Calculator extends ActionBarActivity implements View.OnClickListene
     private Button b_eulers;
     private Button b_shift;
     private Editable mDisplayText;
+    private TextView mAngleUnitText;
     private ArrayList<HistoryItem> mHistoryList = new ArrayList<HistoryItem>();
     private Parser mParser;
     private String mSinText = "sin";
     private String mCosText = "cos";
     private String mTanText = "tan";
+    private String mDegText = "DEG";
+    private String mRadText = "RAD";
     private Vibrator myVib;
 
     @Override
@@ -139,6 +146,7 @@ public class Calculator extends ActionBarActivity implements View.OnClickListene
     private void init() {
 
         displayView = (EditText)findViewById(R.id.display);
+        mAngleUnitText = (TextView)findViewById(R.id.angle_units_text);
 
         displayView.setFocusable(false);
         displayView.setClickable(true);
@@ -148,32 +156,25 @@ public class Calculator extends ActionBarActivity implements View.OnClickListene
 
         b_clear = (Button)findViewById(R.id.clear_button);
         b_backspace = (Button)findViewById(R.id.backspace_button);
-
         b_scientific_notation = (Button)findViewById(R.id.scientific_notation_button);
         b_pi = (Button)findViewById(R.id.pi_button);
-
         b_period = (Button)findViewById(R.id.period_button);
         b_left_parenthesis = (Button)findViewById(R.id.left_parenthesis_button);
         b_right_parenthesis = (Button)findViewById(R.id.right_parenthesis_button);
-
         b_shift = (Button)findViewById(R.id.shift_button);
-
+        b_angle_units = (Button)findViewById(R.id.angle_units_button);
         b_eulers = (Button)findViewById(R.id.eulers_button);
 
         displayView.setOnClickListener(this);
-
         b_clear.setOnClickListener(this);
         b_backspace.setOnClickListener(this);
-
         b_scientific_notation.setOnClickListener(this);
         b_pi.setOnClickListener(this);
-
         b_period.setOnClickListener(this);
         b_left_parenthesis.setOnClickListener(this);
         b_right_parenthesis.setOnClickListener(this);
-
         b_shift.setOnClickListener(this);
-
+        b_angle_units.setOnClickListener(this);
         b_eulers.setOnClickListener(this);
 
         setOperatorButtonVariables();
@@ -471,6 +472,19 @@ public class Calculator extends ActionBarActivity implements View.OnClickListene
                 break;
             }
 
+            case R.id.angle_units_button: {
+
+                if (inRadians) {
+                    mAngleUnitText.setText(mDegText);
+                    b_angle_units.setText(mRadText);
+                } else {
+                    mAngleUnitText.setText(mRadText);
+                    b_angle_units.setText(mDegText);
+                }
+                inRadians = !(inRadians);
+                break;
+            }
+
             default:
                 break;
 
@@ -681,6 +695,9 @@ public class Calculator extends ActionBarActivity implements View.OnClickListene
             ExpressionNode expr = mParser.parse(expStr);
 
             expr.accept(new SetVariable("pi", Math.PI));
+            if(expr.getType() == ExpressionNode.FUNCTION_NODE){
+                ((FunctionExpressionNode)expr).setIsRadians(inRadians);
+            }
 
             double resultToStore = expr.getValue();
 

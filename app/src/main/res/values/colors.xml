@@ -10,7 +10,6 @@
     <color name="display_background">#DCE9BE</color>
     <color name="history_title_background">#ff3b3a3d</color>
     <color name="history_result_text_color">#343336</color>
-    <color name="history_title_color"></color>
 
     <color name="action_bar_color">#99173C</color>
     <color name="action_bar_title_color">#DCE9BE</color>

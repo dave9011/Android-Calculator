@@ -24,6 +24,8 @@
 
 package com.dhernandez.calculator.utils;
 
+import android.util.Log;
+
 /**
  * An ExpressionNode that handles mathematical functions.
  * 
@@ -31,36 +33,36 @@ package com.dhernandez.calculator.utils;
  */
 public class FunctionExpressionNode implements ExpressionNode
 {
+
   /** function id for the sin function */
   public static final int SIN = 1;
   /** function id for the cos function */
   public static final int COS = 2;
   /** function id for the tan function */
   public static final int TAN = 3;
-
   /** function id for the asin function */
   public static final int ASIN = 4;
   /** function id for the acos function */
   public static final int ACOS = 5;
   /** function id for the atan function */
   public static final int ATAN = 6;
-
   /** function id for the sqrt function */
   public static final int SQRT = 7;
-
     /** ADDED BY DAVE: function id for the cbrt function */
     public static final int CBRT = 12;
-
   /** function id for the exp function */
   public static final int EXP = 8;
-
   /** function id for the ln function */
   public static final int LN = 9;
   /** function id for the log function */
   public static final int LOG = 10;
   /** function id for the log2 function */
   public static final int LOG2 = 11;
-
+    /* Added by Dave on 12/22/14
+        private varible that is set in the evaluateExpression method of Calculator.java;
+        it will be used to determine if the argument is in degrees or radians
+     */
+    private boolean isRadians;
   /** the id of the function to apply to the argument */
   private int function;
 
@@ -138,6 +140,11 @@ public class FunctionExpressionNode implements ExpressionNode
     return "sin|cos|tan|asin|acos|atan|sqrt|cbrt|exp|ln|log|log2";
   }
 
+    public void setIsRadians(boolean isRadians){
+        this.isRadians = isRadians;
+        Log.v("in FunctionExpressionNode, the value of isRadians = ", "" + this.isRadians);
+    }
+
   /**
    * Returns the type of the node, in this case ExpressionNode.FUNCTION_NODE
    */
@@ -157,17 +164,44 @@ public class FunctionExpressionNode implements ExpressionNode
     switch (function)
     {
       case SIN:
-        return Math.sin(argument.getValue());
+          if(isRadians){
+              return Math.sin(argument.getValue());
+          } else {
+              return Math.sin( Math.toRadians(argument.getValue()) );
+          }
+
       case COS:
-        return Math.cos(argument.getValue());
+          if(isRadians){
+              return Math.cos(argument.getValue());
+          } else {
+              return Math.cos(Math.toRadians(argument.getValue()));
+          }
+
       case TAN:
-        return Math.tan(argument.getValue());
+          if(isRadians){
+              return Math.tan(argument.getValue());
+          } else {
+              return Math.tan(Math.toRadians(argument.getValue()));
+          }
+
       case ASIN:
-        return Math.asin(argument.getValue());
+          if(isRadians){
+              return Math.asin(argument.getValue());
+          } else {
+              return Math.asin(Math.toRadians(argument.getValue()));
+          }
       case ACOS:
-        return Math.acos(argument.getValue());
+          if(isRadians){
+              return Math.acos(argument.getValue());
+          } else {
+              return Math.acos(Math.toRadians(argument.getValue()));
+          }
       case ATAN:
-        return Math.atan(argument.getValue());
+          if(isRadians){
+              return Math.atan(argument.getValue());
+          } else {
+              return Math.atan(Math.toRadians(argument.getValue()));
+          }
       case SQRT:
         return Math.sqrt(argument.getValue());
 
